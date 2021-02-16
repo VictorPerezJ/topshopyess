@@ -1,0 +1,1 @@
+[07-Feb-2021 16:34:02 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'anfra_top_shop'@'localhost' (using password: YES) in /home/anfran/topshopyess.com/conexion.php on line 9

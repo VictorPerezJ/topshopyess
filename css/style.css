@@ -1,0 +1,17 @@
+#log {
+    background-image: url(../img/fondo.jpg);
+}
+
+.log {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 50%;
+    text-align: center;
+}
+
+.log_form {
+    text-align: center;
+    color: chocolate;
+}
