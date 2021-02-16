@@ -40,7 +40,7 @@ include ('../funciones/por_agotarse.php');
                 <!-- Consulta -->
                 <?php
                 
-                $query="SELECT * FROM catalogo";
+                $query="SELECT * FROM catalogo ORDER BY id DESC";
                 //$resultado=$conexion->query($query);
                 $resultado= mysqli_query($conexion, $query );session_start();
                 //while($row=$resultado->fetch_assoc()){

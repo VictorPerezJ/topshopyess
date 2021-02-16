@@ -32,7 +32,7 @@ $id_p_n=$id_p + 1;
         <meta name="description" content="Sistema de inventario perteneciente a Top Shop Yess">
         <meta name="keywords" content="Inventario, yess, maquillaje, top shop yess">
         <meta name="author" content="Ing Victor Perez Jarillo, By Octa 5">
-        <title>Actualizar Producto</title>
+        <title>Agregar Producto</title>
         <link rel="shortcut icon" href="../img/logo.jpeg" type="image/x-icon">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -51,15 +51,15 @@ $id_p_n=$id_p + 1;
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <h3 style="text-align: center;">Actualización del Producto <?php echo $nombre_p;?></h3><br>
-                    <form action="" method="post">
-                        <input type="text" class="w3-input" name="" placeholder="Nombre del Producto"><br><br>
-                        <input type="text" class="w3-input" name="" placeholder="Cantidad del Producto"><br><br>
-                        <input type="text" class="w3-input" name="" placeholder="Precio Normal del Producto"><br><br>
-                        <input type="text" class="w3-input" name="" placeholder="Precio Mayoreo del Producto"><br><br>
+                    <h3 style="text-align: center;">Agregar Nuevo Producto</h3><br>
+                    <form action="../agregar_prod.php?id=<?php echo $id_p_n?>" method="post" enctype="multipart/form-data"  class="formulario">
+                        <input type="text" class="w3-input" name="nombre_p" placeholder="Nombre del Producto"><br><br>
+                        <input type="text" class="w3-input" name="cantidad_p" placeholder="Cantidad del Producto"><br><br>
+                        <input type="text" class="w3-input" name="precio_n" placeholder="Precio Normal del Producto"><br><br>
+                        <input type="text" class="w3-input" name="precio_m" placeholder="Precio Mayoreo del Producto"><br><br>
                         <input type="file" name="images" id="images" accept="image/*" required> <br> <br>
-                        <input type="text" name="nombre" value="<?php echo $id_p_n ?>.jpg" hidden>
-                        <input type="submit" value="Actualizar Datos">
+                        <input type="text" name="nombref" value="<?php echo $id_p_n ?>.jpg" hidden>
+                        <input type="submit" name="nombre" value="Agregar Producto" class="btn btn-success">
                     </form>
                     <br><br>
                 </div>
@@ -78,5 +78,5 @@ function closeNav() {
 }
 </script>
 <!-- Script del menú -->
-
+<?php include ('../agregar_prod.php');?>
 </html>
