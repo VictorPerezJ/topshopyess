@@ -48,21 +48,21 @@ while ($row = mysqli_fetch_assoc($resultado)) {
             <div class="row justify-content-center">
                 <div class="col-md-8">
                 <h3 style="text-align: center;">Actualización del Producto <?php echo $nombre_p;?></h3><br>
-                <form action="" method="post">
-                <label>Nombre del Producto</label><input type="text" class="w3-input" value="<?php echo $nombre_p;?>" name="" placeholder="Nombre del Producto">
-                <label>Cantidad del Producto</label><input type="text" class="w3-input" value="<?php echo $cantidad_p;?>" name="" placeholder="Cantidad del Producto">
-                <label>Precio Normal del Producto</label><input type="text" class="w3-input" value="<?php echo $precio;?>" name="" placeholder="Precio Normal del Producto">
-                <label>Precio Mayoreo del Producto</label><input type="text" class="w3-input" value="<?php echo $precio_m;?>" name="" placeholder="Precio Mayoreo del Producto">
-                <input type="submit" value="Actualizar Datos">
+                <form action="actualizar_info.php?id=<?php echo $id_act?>" method="post">
+                <label>Nombre del Producto</label><input type="text" class="w3-input" value="<?php echo $nombre_p;?>" name="nombre" placeholder="Nombre del Producto">
+                <label>Cantidad del Producto</label><input type="text" class="w3-input" value="<?php echo $cantidad_p;?>" name="cantidad" placeholder="Cantidad del Producto">
+                <label>Precio Normal del Producto</label><input type="text" class="w3-input" value="<?php echo $precio;?>" name="precio_n" placeholder="Precio Normal del Producto">
+                <label>Precio Mayoreo del Producto</label><input type="text" class="w3-input" value="<?php echo $precio_m;?>" name="precio_m" placeholder="Precio Mayoreo del Producto"><br>
+                <input type="submit" class="btn btn-success" value="Actualizar Datos">
                 </form>
                 <br><br>
                 </div>
                 <div class="col-md-6">
                 <h3 style="text-align: center;">Foto Actual</h3><br>
-                <form action="" method="post" class="formulario" enctype="multipart/form-data">
+                <form action="../actualizar_foto.php?id=<?php echo $id_act?>" method="post" class="formulario" enctype="multipart/form-data">
                 <img src="../<?php echo $foto_p;?>" style="width: 100%; height:auto; padding:30px" alt="">
                 <input type="file" name="images" id="images" accept="image/*" required>	<br> <br>
-                <input type="text" name="nombre" value="<?php echo $id_p ?>.jpg" hidden>
+                <input type="text" name="nombref" value="<?php echo $id_p?>.jpg" hidden>
                 <input type="submit" name="nombre" value="Actualizar Foto">
                 </form>
                 </div>
@@ -81,4 +81,7 @@ function closeNav() {
 }
 </script>
 <!-- Script del menú -->
+<?php
+include ('../actualizar_foto.php')
+?>
 </html>
