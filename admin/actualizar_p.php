@@ -1,5 +1,7 @@
 <?php
 
+include ('../validacion.php');
+
 $id_act=$_GET['id'];
 
 include ('../conexion.php');

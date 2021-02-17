@@ -1,8 +1,8 @@
 <?php
-include_once('../conexion.php');
-
 session_start();
 ob_start();
+
+include_once('../conexion.php');
 
 ?>
 <!DOCTYPE html>
