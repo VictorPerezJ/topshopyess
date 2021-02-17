@@ -1,23 +1,18 @@
 <?php
 include_once('../conexion.php');
-// include_once('../verificar.php');
 
 session_start();
 ob_start();
 
-// $nombre_bd=$_GET['nombre'];
-
-include ('../funciones/por_agotarse.php');
+include('../funciones/por_agotarse.php');
 
 $query = "SELECT * FROM catalogo ORDER BY id DESC LIMIT 1";
-//$resultado=$conexion->query($query);
 $resultado = mysqli_query($conexion, $query);
 session_start();
-//while($row=$resultado->fetch_assoc()){
 while ($row = mysqli_fetch_assoc($resultado)) {
     $id_p = $row['id'];
 }
-$id_p_n=$id_p + 1;
+$id_p_n = $id_p + 1;
 
 ?>
 <!DOCTYPE html>
@@ -32,7 +27,7 @@ $id_p_n=$id_p + 1;
         <meta name="description" content="Sistema de inventario perteneciente a Top Shop Yess">
         <meta name="keywords" content="Inventario, yess, maquillaje, top shop yess">
         <meta name="author" content="Ing Victor Perez Jarillo, By Octa 5">
-        <title>Agregar Producto</title>
+        <title>Agregar Cliente</title>
         <link rel="shortcut icon" href="../img/logo.jpeg" type="image/x-icon">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -46,20 +41,17 @@ $id_p_n=$id_p + 1;
 </head>
 
 <body style="background-color: #f75c96; color: white;">
-    <?php include ('menu.php');?>
+    <?php include('menu.php'); ?>
     <section>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <h3 style="text-align: center;">Agregar Nuevo Producto</h3><br>
-                    <form action="../agregar_prod.php?id=<?php echo $id_p_n?>" method="post" enctype="multipart/form-data"  class="formulario">
-                        <input type="text" class="w3-input" name="nombre_p" placeholder="Nombre del Producto" required><br><br>
-                        <input type="text" class="w3-input" name="cantidad_p" placeholder="Cantidad del Producto" required><br><br>
-                        <input type="text" class="w3-input" name="precio_n" placeholder="Precio Normal del Producto" required><br><br>
-                        <input type="text" class="w3-input" name="precio_m" placeholder="Precio Mayoreo del Producto" required><br><br>
-                        <input type="file" name="images" id="images" accept="image/*" required> <br> <br>
-                        <input type="text" name="nombref" value="<?php echo $id_p_n ?>.jpg" hidden>
-                        <input type="submit" name="nombre" value="Agregar Producto" class="btn btn-success">
+                    <form action="agregar_cliente_db.php" method="post" class="formulario">
+                        <input type="text" class="w3-input" name="nombre_c" placeholder="Nombre del Cliente" required><br><br>
+                        <input type="text" class="w3-input" name="numero_tel" placeholder="Número de Teléfono" minlength="10" maxlength="15" required><br><br>
+                        <input type="text" class="w3-input" name="ciudad" placeholder="Ciudad" required><br><br>
+                        <input type="submit" name="nombre" value="Agregar Cliente" class="btn btn-success">
                     </form>
                     <br><br>
                 </div>
@@ -69,14 +61,15 @@ $id_p_n=$id_p + 1;
 </body>
 <!-- Script del menú -->
 <script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
 
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
 </script>
 <!-- Script del menú -->
-<?php include ('../agregar_prod.php');?>
+<?php include('../agregar_prod.php'); ?>
+
 </html>
