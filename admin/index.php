@@ -36,6 +36,11 @@ include ('../funciones/por_agotarse.php');
 
     <section>
         <div class="container">
+        <div class="row justify-content-center">
+        <div class="col-md-12">
+        <a href="generar_nota.php"><button class="btn btn-warning" style="float: right; color: crimson;">Generar Nota</button></a>
+        </div>
+        </div>
             <div class="row justify-content">
                 <!-- Consulta -->
                 <?php

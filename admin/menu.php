@@ -13,5 +13,5 @@ ob_start(); ?>
     <a href="#">Reportes</a>
     <a href="../funciones/cerrar_sesion.php">Cerrar Sesión</a>
 </div>
-<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menú</span>
+<span style="font-size:30px;cursor:pointer; color:white" onclick="openNav()">&#9776; Menú</span>
 <!-- Menú -->
