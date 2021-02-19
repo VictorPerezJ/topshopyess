@@ -134,7 +134,6 @@ $clave_de_nota = $usuario .'00'. $num_n;
         var producto = $('#producto' + str).val();
         var vendedor = $('#vendedor' + str).val();
 
-        // var datastring = 'id='+id+'&precio='+precio+'&cantidad='+cantidad+'&nota='+nota+'&producto='+producto+'&vendedor='+vendedor;
 
         $.ajax({
             type: 'POST',

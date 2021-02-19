@@ -13,13 +13,6 @@ $vendedor=$_POST['vendedor'];
 
 $fecha = date("Y-m-d");
 
-echo $id;
-echo $precio;
-echo $cantidad;
-echo $nota;
-echo $producto;
-echo $vendedor;
-
 $agregar="INSERT INTO notas SET producto='$producto', precio='$precio', vendedor='$vendedor', nota='$nota', cantidad='$cantidad', fecha='$fecha'";
 
 $actualizado=mysqli_query($conexion, $agregar);
