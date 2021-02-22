@@ -12,7 +12,7 @@ include('../funciones/por_agotarse.php');
 $usuario = $_SESSION['user'];
 $usuario = substr($usuario, 0, 3);
 
-$queryn = "SELECT * FROM num_nota ORDER BY id DESC";
+$queryn = "SELECT * FROM num_nota ORDER BY id ASC";
 //$resultado=$conexion->query($query);
 $resultadon = mysqli_query($conexion, $queryn);
 session_start();

@@ -60,7 +60,7 @@ include ('../funciones/por_agotarse.php');
                 <div class="col-md-4">
                     <h2 style="color: white;"><?php echo $nombre_p ?></h2>
                     <div class="card">
-                        <img src="../<?php echo $foto_p ?>" style="width:100%" alt="">
+                        <img src="../<?php echo $foto_p ?>" style="width:100%; height:350px" alt="">
                         <div class="card-body">En Existencia: <?php echo por_agotarse($cantidad_p) ?></div>
                         <div class="card-body">Precio Mayoreo: $<?php echo $precio ?></div>
                         <div class="card-body">Precio Menudeo: $<?php echo $precio_m ?></div>
