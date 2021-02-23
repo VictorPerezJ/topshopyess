@@ -1,48 +1,63 @@
 <?php
-include_once('../conexion.php');
-// include_once('funciones.php');
 
-session_start();
-ob_start();
+include('../validacion.php');
 
-$clave_de_nota = $_GET['clave'];
+include('../conexion.php');
+
+$fecha1 = $_POST['fecha1'];
+$fecha2 = $_POST['fecha2'];
+
+$nombre_R='Reporte del '.$fecha1. ' al ' .$fecha2;
 
 ?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sistema de inventario perteneciente a Top Shop Yess">
-    <meta name="keywords" content="Inventario, yess, maquillaje, top shop yess">
-    <meta name="author" content="Ing Victor Perez Jarillo, By Octa 5">
-    <title>Imprimir Notas</title>
-    <link rel="shortcut icon" href="../img/logo.jpeg" type="image/x-icon">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/menu.css">
-    <script src="https://kit.fontawesome.com/b7ca65aec2.js" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Sistema de inventario perteneciente a Top Shop Yess">
+        <meta name="keywords" content="Inventario, yess, maquillaje, top shop yess">
+        <meta name="author" content="Ing Victor Perez Jarillo, By Octa 5">
+        <title>Generar Reporte</title>
+        <link rel="shortcut icon" href="../img/logo.jpeg" type="image/x-icon">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/menu.css">
+        <script src="https://kit.fontawesome.com/b7ca65aec2.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
 </head>
 
-<body style="background-color: #f75c96;">
+<body style="background-color: #f75c96; color: white;">
     <?php include('menu.php'); ?>
-
     <section>
         <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <h3 style="text-align: center;">Seleccione las fechas de inicio y final para generar reporte</h3><br>
+                    <form action="generar_reporte.php" method="POST" style="text-align: center;">
+                        <input type="date" name="fecha1">
+                        <input type="date" name="fecha2">
+                        <input type="submit" value="Generar" class="btn btn-success">
+                    </form>
+                    <br><br>
+                </div>
 
+            </div>
             <div id="exportContent">
                 <div class="row justify-content-center">
                     <!-- Consulta -->
                     <div class="col-md-12">
                         <p><img src="https://topshopyess.com/img/logom.jpg" style="width: 5%; height:auto; display:block; position:static" alt=""></p>
 
-                        <h2 style="color: black;">Numero de Nota: <?php echo $clave_de_nota ?></h2>
+                        <h2 style="color: black;">Reporte del: <?php echo $fecha1 ?> al fecha: <?php echo $fecha1 ?></h2>
                         <table id="myTable" class="table table-striped" style="background-color: whitesmoke;">
                             <thead>
                                 <tr>
@@ -50,12 +65,13 @@ $clave_de_nota = $_GET['clave'];
                                     <th style="text-align: center;">Precio Unitario</th>
                                     <th style="text-align: center;">Cantidad</th>
                                     <th style="text-align: center;">Total por Producto</th>
+                                    <th style="text-align: center;">Fecha</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <?php
-                                    $query = "SELECT * FROM notas WHERE nota='$clave_de_nota'";
+                                    $query = "SELECT * FROM notas WHERE fecha BETWEEN '$fecha1' AND '$fecha2' ORDER BY fecha ASC";
                                     //$resultado=$conexion->query($query);
                                     $resultado = mysqli_query($conexion, $query);
                                     session_start();
@@ -80,6 +96,7 @@ $clave_de_nota = $_GET['clave'];
                                         <td style="text-align: center;">$<?php echo $precio ?></td>
                                         <td style="text-align: center;"><?php echo $cantidad ?></td>
                                         <td style="text-align: center;">$<?php echo $total ?></td>
+                                        <td style="text-align: center;"><?php echo $fecha ?></td>
                                 </tr>
                             <?php
                                     }
@@ -87,66 +104,23 @@ $clave_de_nota = $_GET['clave'];
                             <tr style="background-color: pink;">
                                 <td style="text-align: center;">Resumen</td>
                                 <td style="text-align: center;">Total Unitario:$<?php echo $precioG ?></td>
-                                <td style="text-align: center;">Products Totales:<?php echo $prodG ?></td>
+                                <td style="text-align: center;">Productos Totales:<?php echo $prodG ?></td>
                                 <td style="text-align: center;">Total General:$<?php echo $totalG ?></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-
-                <div class="row justify-content-center">
-                    <div class="col-md-12">
-                        <h2 style="color: black; float:left">Nota de <?php echo $cliente ?></h2>
-                    </div>
-                </div>
-                <!-- Dirección de Envio -->
-                <div class="div_a_mostrar">
-                    <div class="row-justify-content-center">
-                        <h2 style="text-align: center;">Datos de Envío</h2>
-                    </div>
-
-                    <div class="row justify-content-center">
-                        <?php
-                        $queryd = "SELECT * FROM dir_env WHERE clave='$clave_de_nota'";
-                        //$resultado=$conexion->query($query);
-                        $resultadod = mysqli_query($conexion, $queryd);
-                        session_start();
-                        //while($row=$resultado->fetch_assoc()){
-                        while ($row = mysqli_fetch_assoc($resultadod)) {
-                            $recibe = $row['recibe'];
-                            $ciudadEdo = $row['ciudadEdo'];
-                            $calle = $row['calle'];
-                            $colonia = $row['colonia'];
-                            $cp = $row['cp'];
-                            $tel = $row['tel'];
-                        }
-                        ?>
-                        <div class="col-md-6">
-                            <h3 style="text-align: center;">Recibe: <?php echo $recibe ?></h3>
-                            <h3 style="text-align: center;">Ciudad y Estado: <?php echo $ciudadEdo ?></h3>
-                            <h3 style="text-align: center;">Calle: <?php echo $calle ?></h3>
-                        </div>
-                        <div class="col-md-6">
-                            <h3 style="text-align: center;">Colonia: <?php echo $colonia ?></h3>
-                            <h3 style="text-align: center;">Código Postal: <?php echo $cp ?></h3>
-                            <h3 style="text-align: center;">Teléfono: <?php echo $tel ?></h3>
-                        </div>
-                    </div>
-                </div>
-                <!-- Dirección de Envio -->
             </div>
-            <!-- Fin de Esportacion de word -->
             <div class="col-md-12">
                     <!-- <a href="imprimir.php"> -->
-                    <button class="btn btn-primary" style="float: right; color: white;" onclick="Export2Doc('exportContent', '<?php echo $clave_de_nota ?>');">Imprimir Nota</button>
+                    <button class="btn btn-primary" style="float: right; color: white;" onclick="Export2Doc('exportContent', '<?php echo $nombre_R?>');">Imprimir Reporte</button>
                     <!-- </a> -->
                 </div><br><br><br>
         </div>
+        </div>
     </section>
 </body>
-
-
 <!-- Script del menú -->
 <script>
     function openNav() {
@@ -158,6 +132,8 @@ $clave_de_nota = $_GET['clave'];
     }
 </script>
 <!-- Script del menú -->
+
+<!-- Script de impresión  -->
 <script>
     function Export2Doc(element, filename = '') {
         var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
@@ -195,7 +171,5 @@ $clave_de_nota = $_GET['clave'];
         document.body.removeChild(downloadLink);
     }
 </script>
-
-
 
 </html>

@@ -1,0 +1,66 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>
+                <div class="row justify-content-center">
+                    <!-- Consulta -->
+                    <div class="col-md-12">
+                        <p><img src="https://topshopyess.com/img/logom.jpg" style="width: 5%; height:auto; display:block; position:static" alt=""></p>
+
+                        <h2 style="color: black;">Numero de Nota: Adm001</h2>
+                        <table id="myTable" class="table table-striped" style="background-color: whitesmoke;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Producto</th>
+                                    <th style="text-align: center;">Precio Unitario</th>
+                                    <th style="text-align: center;">Cantidad</th>
+                                    <th style="text-align: center;">Total por Producto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                                                            <td style="text-align: center;">Sombra Mercury </td>
+                                        <td style="text-align: center;">$155</td>
+                                        <td style="text-align: center;">92</td>
+                                        <td style="text-align: center;">$14260</td>
+                                </tr>
+                                                                    <tr><td style="text-align: center;">Producto Muestra</td>
+                                        <td style="text-align: center;">$12</td>
+                                        <td style="text-align: center;">49</td>
+                                        <td style="text-align: center;">$588</td>
+                                </tr>
+                                                        <tr style="background-color: pink;">
+                                <td style="text-align: center;">Resumen</td>
+                                <td style="text-align: center;">Total Unitario:$167</td>
+                                <td style="text-align: center;">Products Totales:141</td>
+                                <td style="text-align: center;">Total General:$14848</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <h2 style="color: black; float:left">Nota de Victor Perez</h2>
+                    </div>
+                </div>
+                <!-- Dirección de Envio -->
+                Dirección de Envío 
+                <div class="div_a_mostrar">
+                    <div class="row-justify-content-center">
+                        <h2 style="text-align: center;">Datos de Envío</h2>
+                    </div>
+
+                    <div class="row justify-content-center">
+                                                <div class="col-md-6">
+                            <h3 style="text-align: center;">Recibe: Victor Perez</h3>
+                            <h3 style="text-align: center;">Ciudad y Estado: Cuernavaca Mor</h3>
+                            <h3 style="text-align: center;">Calle: Las Flores 3</h3>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 style="text-align: center;">Colonia: Benito Juarez</h3>
+                            <h3 style="text-align: center;">Código Postal: 62410</h3>
+                            <h3 style="text-align: center;">Teléfono: 7773498502</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- Dirección de Envio -->
+            </body></html>

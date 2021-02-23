@@ -11,7 +11,7 @@ ob_start(); ?>
     <a href="agregar_cliente.php">Agregar Cliente</a>
     <a href="generar_nota.php">Generar Nota</a>
     <a href="notas.php">Notas</a>
-    <a href="#">Reportes</a>
+    <a href="generar_reporte.php">Reportes</a>
     <a href="../funciones/cerrar_sesion.php">Cerrar Sesión</a>
 </div>
 <span style="font-size:30px;cursor:pointer; color:white" onclick="openNav()">&#9776; Menú</span>
