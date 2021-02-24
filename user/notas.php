@@ -4,6 +4,8 @@ include_once('../conexion.php');
 session_start();
 ob_start();
 
+$vendedor1=$_SESSION['user'];
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -55,7 +57,7 @@ ob_start();
                             <tbody>
                                 <tr>
                                     <?php
-                                    $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas ORDER BY nota ASC";
+                                    $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE vendedor='$vendedor1' ORDER BY nota ASC";
                                     //$resultado=$conexion->query($query);
                                     $resultado = mysqli_query($conexion, $query);
                                     session_start();

@@ -10,18 +10,8 @@ ob_start();
 include('../funciones/por_agotarse.php');
 
 $usuario = $_SESSION['user'];
-$usuario = substr($usuario, 0, 3);
 
-$queryn = "SELECT * FROM num_nota ORDER BY id ASC";
-//$resultado=$conexion->query($query);
-$resultadon = mysqli_query($conexion, $queryn);
-session_start();
-//while($row=$resultado->fetch_assoc()){
-while ($row = mysqli_fetch_assoc($resultadon)) {
-    $num_n1 = $row['num_n'];
-}
-$num_n = $num_n1 + 1;
-$clave_de_nota = $usuario .'00'. $num_n;
+$clave_de_nota =$_GET['clave_n'];
 
 ?>
 <!DOCTYPE html>

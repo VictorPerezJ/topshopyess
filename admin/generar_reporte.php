@@ -57,7 +57,7 @@ $nombre_R='Reporte del '.$fecha1. ' al ' .$fecha2;
                     <div class="col-md-12">
                         <p><img src="https://topshopyess.com/img/logom.jpg" style="width: 5%; height:auto; display:block; position:static" alt=""></p>
 
-                        <h2 style="color: black;">Reporte del: <?php echo $fecha1 ?> al fecha: <?php echo $fecha1 ?></h2>
+                        <h2 style="color: black;">Reporte del: <?php echo $fecha1 ?> al fecha: <?php echo $fecha2?></h2>
                         <table id="myTable" class="table table-striped" style="background-color: whitesmoke;">
                             <thead>
                                 <tr>
