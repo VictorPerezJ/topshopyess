@@ -9,7 +9,8 @@ ob_start(); ?>
     <a href="agregar_p.php">Agregar Producto</a>
     <a href="list_clientes.php">Clientes</a>
     <a href="agregar_cliente.php">Agregar Cliente</a>
-    <a href="generar_nota.php">Generar Nota</a>
+    <a href="generar_nota.php?precio_nota=mayoreo">Generar Nota Mayoreo</a>
+    <a href="generar_nota.php?precio_nota=menudeo">Generar Nota Menudeo</a>
     <a href="notas.php">Notas</a>
     <a href="generar_reporte.php">Reportes</a>
     <a href="../funciones/cerrar_sesion.php">Cerrar Sesión</a>

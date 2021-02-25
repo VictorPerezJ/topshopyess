@@ -5,13 +5,14 @@ include_once('../conexion.php');
 session_start();
 ob_start();
 
+$precio_nota = $_GET['tipoN'];
 // $nombre_bd=$_GET['nombre'];
 
 include('../funciones/por_agotarse.php');
 
 $usuario = $_SESSION['user'];
 
-$clave_de_nota =$_GET['clave_n'];
+$clave_de_nota = $_GET['clave_n'];
 
 ?>
 <!DOCTYPE html>
@@ -45,58 +46,101 @@ $clave_de_nota =$_GET['clave_n'];
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12">
-                    <a href="imprimir_nota.php?clave=<?php echo $clave_de_nota ?>"><button class="btn btn-warning" style="float: right; color: crimson;">Cerrar e Imprimir Nota</button></a>
+                    <a href="imprimir_nota.php?clave=<?php echo $clave_de_nota ?>&tipoN=<?php echo $precio_nota ?>"><button class="btn btn-warning" style="float: right; color: crimson;">Cerrar e Imprimir Nota</button></a>
                 </div>
                 <div class="col-md-12">
-                    <h3 style="color: white; float:right">Clave de Nota: <?php echo $clave_de_nota ?></h3>
+                    <h3 style="color: white; float:right">Clave de Nota: <?php echo $clave_de_nota ?></h3><br>
+                    <h3 style="color: white; float:left">Tipo de Nota: <?php echo $precio_nota ?></h3>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <!-- Consulta -->
                 <?php
-
-                $query = "SELECT * FROM catalogo ORDER BY id DESC";
-                //$resultado=$conexion->query($query);
-                $resultado = mysqli_query($conexion, $query);
-                session_start();
-                //while($row=$resultado->fetch_assoc()){
-                while ($row = mysqli_fetch_assoc($resultado)) {
-                    $id_p = $row['id'];
-                    $nombre_p = $row['nombre_p'];
-                    $cantidad_p = $row['cantidad'];
-                    $precio = $row['precio'];
-                    $precio_m = $row['precio_m'];
-                    $foto_p = $row['foto'];
+                switch ($precio_nota) {
+                    case "menudeo":
+                        $query = "SELECT * FROM catalogo ORDER BY id DESC";
+                        //$resultado=$conexion->query($query);
+                        $resultado = mysqli_query($conexion, $query);
+                        session_start();
+                        //while($row=$resultado->fetch_assoc()){
+                        while ($row = mysqli_fetch_assoc($resultado)) {
+                            $id_p = $row['id'];
+                            $nombre_p = $row['nombre_p'];
+                            $cantidad_p = $row['cantidad'];
+                            $precio = $row['precio'];
+                            $precio_m = $row['precio_m'];
+                            $foto_p = $row['foto'];
                 ?>
-                   <div class="col-md-2">
-                   <br><br>
-                        <p style="color: white; height:70px; font-size:22px"><?php echo $nombre_p ?></p>
-                        <div class="card">
-                            <img src="../<?php echo $foto_p ?>" style="width:100%; height:auto" alt="">
-                            <p>En Existencia: <?php echo por_agotarse($cantidad_p) ?></p>
-                            <p>Mayoreo: $<?php echo $precio ?></p>
-                            <p>Menudeo: $<?php echo $precio_m ?></p>
+                            <div class="col-md-2">
+                                <br><br>
+                                <p style="color: white; height:70px; font-size:22px"><?php echo $nombre_p ?></p>
+                                <div class="card">
+                                    <img src="../<?php echo $foto_p ?>" style="width:100%; height:auto" alt="">
+                                    <p>En Existencia: <?php echo por_agotarse($cantidad_p) ?></p>
+                                    <!-- <p>Mayoreo: $<?php //echo $precio 
+                                                        ?></p> -->
+                                    <p>Menudeo: $<?php echo $precio ?></p>
 
-                            <form id="<?php echo $id_p ?>" method="POST"></form>
-                            <select id="precio<?php echo $id_p ?>" name="precio" required>
-                                <option style="color:black" value="" autofocus selected>Seleccione Precio</option>
-                                <option value="<?php echo $precio ?>">Precio Mayoreo: <?php echo $precio ?></option>
-                                <option value="<?php echo $precio_m ?>">Precio Menudeo:<?php echo $precio_m ?></option>
-                            </select>
+                                    <form id="<?php echo $id_p ?>" method="POST"></form>
+                                    <input id="precio<?php echo $id_p ?>" type="text" value="<?php echo $precio ?>" name="precio" placeholder="precio" required readonly style="display: none;">
 
-                            <input id="cantidad<?php echo $id_p ?>" type="text" name="cantidad" placeholder="Cantidad" required>
+                                    <input id="cantidad<?php echo $id_p ?>" type="text" name="cantidad" placeholder="Cantidad" required>
 
-                            <input id="nota<?php echo $id_p ?>" type="text" name="nota" style="display: none;" value="<?php echo $clave_de_nota ?>">
+                                    <input id="nota<?php echo $id_p ?>" type="text" name="nota" style="display: none;" value="<?php echo $clave_de_nota ?>">
 
-                            <input id="producto<?php echo $id_p ?>" type="text" name="producto" style="display: none;" value="<?php echo $nombre_p ?>">
+                                    <input id="producto<?php echo $id_p ?>" type="text" name="producto" style="display: none;" value="<?php echo $nombre_p ?>">
 
-                            <input id="vendedor<?php echo $id_p ?>" type="text" name="vendedor" style="display: none;" value="<?php echo $_SESSION['user']; ?>">
+                                    <input id="vendedor<?php echo $id_p ?>" type="text" name="vendedor" style="display: none;" value="<?php echo $_SESSION['user']; ?>">
 
-                            <button onclick="agregarANota(<?php echo $id_p ?>)" id="btn<?php echo $id_p ?>" class='btn btn-primary' style="width:100%"><i class="fas fa-sync"></i> Agregar</button></a>
-                            </form>
-                        </div>
-                    </div>
+                                    <button onclick="agregarANota(<?php echo $id_p ?>)" id="btn<?php echo $id_p ?>" class='btn btn-primary' style="width:100%"><i class="fas fa-sync"></i> Agregar</button></a>
+                                    </form>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        break;
+                    case "mayoreo":
+                        $query = "SELECT * FROM catalogo ORDER BY id DESC";
+                        //$resultado=$conexion->query($query);
+                        $resultado = mysqli_query($conexion, $query);
+                        session_start();
+                        //while($row=$resultado->fetch_assoc()){
+                        while ($row = mysqli_fetch_assoc($resultado)) {
+                            $id_p = $row['id'];
+                            $nombre_p = $row['nombre_p'];
+                            $cantidad_p = $row['cantidad'];
+                            $precio = $row['precio'];
+                            $precio_m = $row['precio_m'];
+                            $foto_p = $row['foto'];
+                        ?>
+                            <div class="col-md-2">
+                                <br><br>
+                                <p style="color: white; height:70px; font-size:22px"><?php echo $nombre_p ?></p>
+                                <div class="card">
+                                    <img src="../<?php echo $foto_p ?>" style="width:100%; height:auto" alt="">
+                                    <p>En Existencia: <?php echo por_agotarse($cantidad_p) ?></p>
+                                    <!-- <p>Mayoreo: $<?php //echo $precio 
+                                                        ?></p> -->
+                                    <p>Mayoreo: $<?php echo $precio_m ?></p>
+
+                                    <form id="<?php echo $id_p ?>" method="POST"></form>
+                                    <input id="precio<?php echo $id_p ?>" type="text" value="<?php echo $precio_m ?>" name="precio" placeholder="precio" required readonly style="display: none;">
+
+                                    <input id="cantidad<?php echo $id_p ?>" type="text" name="cantidad" placeholder="Cantidad" required>
+
+                                    <input id="nota<?php echo $id_p ?>" type="text" name="nota" style="display: none;" value="<?php echo $clave_de_nota ?>">
+
+                                    <input id="producto<?php echo $id_p ?>" type="text" name="producto" style="display: none;" value="<?php echo $nombre_p ?>">
+
+                                    <input id="vendedor<?php echo $id_p ?>" type="text" name="vendedor" style="display: none;" value="<?php echo $_SESSION['user']; ?>">
+
+                                    <button onclick="agregarANota(<?php echo $id_p ?>)" id="btn<?php echo $id_p ?>" class='btn btn-primary' style="width:100%"><i class="fas fa-sync"></i> Agregar</button></a>
+                                    </form>
+                                </div>
+                            </div>
                 <?php
+                        }
+                        break;
                 }
                 ?>
 
@@ -116,7 +160,6 @@ $clave_de_nota =$_GET['clave_n'];
 </script>
 <!-- Script del menú -->
 
-
 <script>
     function agregarANota(str) {
         var id = str;
@@ -135,6 +178,7 @@ $clave_de_nota =$_GET['clave_n'];
             async: false,
             success: function() {
                 alert("Producto Agregado");
+                location.reload();
             }
         });
     }

@@ -18,7 +18,17 @@ $agregar="INSERT INTO notas SET producto='$producto', precio='$precio', vendedor
 $actualizado=mysqli_query($conexion, $agregar);
 
 if($actualizado>0){
-    echo'<script language="javascript">alert("Cliente correctamente registrado :)");</script>'; 
+
+$query3 = "SELECT * FROM catalogo WHERE nombre_p='$producto'";
+$resultado3 = mysqli_query($conexion, $query3);
+session_start();
+while ($row = mysqli_fetch_assoc($resultado3)) {
+    $cantidad1 = $row['cantidad'];
+    $cantidad_r=$cantidad1-$cantidad;
+
+$actulizar_can_pro="UPDATE catalogo SET cantidad='$cantidad_r' WHERE nombre_p='$producto'";
+$actualizado_c = mysqli_query($conexion, $actulizar_can_pro);
+}
      
 }else{
     echo'<script language="javascript">alert("Los datos no se cargaron correctamente, favor de llamar a soporte :(");</script>'; 

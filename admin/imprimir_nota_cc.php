@@ -5,6 +5,7 @@ include_once('funciones.php');
 session_start();
 ob_start();
 
+$tipoN = $_GET['tipoN'];
 $clave_de_nota = $_GET['clave'];
 
 $queryp = "SELECT * FROM notas WHERE nota='$clave_de_nota'";
@@ -28,6 +29,9 @@ while ($row = mysqli_fetch_assoc($resultadop)) {
     $precioG += $precio;
     $prodG += $cantidad;
 }
+if(empty($producto)){
+    echo "<script>window.location='notas.php';</script>";
+}
 
 $total_total = $totalG;
 
@@ -45,21 +49,23 @@ while ($row = mysqli_fetch_assoc($resultadode)) {
     $cp = $row['cp'];
     $tel = $row['tel'];
 }
-
-$queryEnvvio="SELECT * FROM tab_env WHERE '$totalG' > rango AND '$totalG' < rango2 AND tipo='$tipoDeEnvio'";
+$queryEnvvio = "SELECT * FROM tab_env WHERE '$totalG' > rango AND '$totalG' < rango2 AND tipo='$tipoDeEnvio'";
 $resultadoEnvio = mysqli_query($conexion, $queryEnvvio);
 while ($row = mysqli_fetch_assoc($resultadoEnvio)) {
     $envio = $row['costo'];
 }
-if(empty($envio)){
-    $queryEnvvio2="SELECT * FROM tab_env WHERE '$totalG' > rango2 AND tipo ='$tipoDeEnvio'";
+if (empty($envio)) {
+    $queryEnvvio2 = "SELECT * FROM tab_env WHERE '$totalG' > rango2 AND tipo ='$tipoDeEnvio'";
     $resultadoEnvio2 = mysqli_query($conexion, $queryEnvvio2);
     while ($row = mysqli_fetch_assoc($resultadoEnvio2)) {
         $envio = $row['costo'];
-    } 
+    }
 }
 $total_total = $totalG + $envio;
 
+if(empty($producto)){
+    echo "<script>window.location='notas.php;</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -114,7 +120,7 @@ $total_total = $totalG + $envio;
 
                     <!-- Consulta -->
                     <div class="col-md-10">
-                        
+
                         <table id="myTable" class="table table-striped" style="background-color: #edcfcf;">
                             <thead style="background-color: crimson;">
                                 <tr>
@@ -148,12 +154,12 @@ $total_total = $totalG + $envio;
                                         <td style="text-align: center;">$<?php echo $precio ?></td>
                                         <td style="text-align: center;"><?php echo $cantidad ?></td>
                                         <td style="text-align: center;">$<?php echo $total ?></td>
-                                        <td style="text-align: center;"><button onclick="eliminarProd(<?php echo $id_p ?>)" id="btn<?php echo $id_p ?>"><i class="fas fa-minus" style="color:red"></i></button></td>
+                                        <td style="text-align: center;"><a href="eliminarProd.php?id=<?php echo $id_p?>&cantidad=<?php echo $cantidad ?>&producto=<?php echo $producto?>&clave=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN ?>"><button><i class="fas fa-minus" style="color:red"></i></button></a></td>
                                 </tr>
                             <?php
                                     }
                             ?>
-                            <tr style="height:60px">
+                            <tr style=" height:60px">
                                 <td style="text-align: center; color: black">Resumen</td>
                                 <td style="text-align: center; color: black">Total Unitario: $<?php echo $precioG ?></td>
                                 <td style="text-align: center; color: black">Productos Totales: <?php echo $prodG ?></td>
@@ -163,7 +169,7 @@ $total_total = $totalG + $envio;
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;">Gastos de Envío</td>
-                                <td style="text-align: center;">$<?php echo $envio?></td>
+                                <td style="text-align: center;">$<?php echo $envio ?></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center;"></td>
@@ -178,13 +184,51 @@ $total_total = $totalG + $envio;
 
                 <!-- Dirección de Envio -->
             </div>
-            <div class="row justify-content-center"></div>
             <!-- Fin de Esportacion de word -->
 
-          
             <div class="row justify-content-center" style="margin-bottom: 100px; padding:20px">
                 <div class="col-md-3">
+                    <form action="" name="asignar" method="post" style="float: right;">
+                        <select name="cliente" id="cliente">
+                            <option style="color:black" value="0" autofocus>Asignar Cliente</option>
+                            <?php
+                            $query2 = "SELECT * FROM clientes ";
+                            //$resultado=$conexion->query($query);
+                            $resultado2 = mysqli_query($conexion, $query2);
+                            session_start();
+                            //while($row=$resultado->fetch_assoc()){
+                            while ($row = mysqli_fetch_assoc($resultado2)) {
+                                $id_p = $row['id'];
+                                $nombrec = $row['nombre'];
+                                $telefono_c = $row['telefono_c'];
+                                $ciudad = $row['ciudad'];
+                            ?>
+                                <option value="<?php echo $nombrec ?>"><?php echo $nombrec ?></option>
+                            <?php } ?>
+                        </select><br><br>
+                        <input type="text" value="<?php echo $clave_de_nota ?>" id="clave" name="clave" style="display: none;">
+                        <button class="btn btn-success" onclick="asignarCliente();">Asignar Cliente</button>
+                    </form><br><br>
+                </div>
+                <div class="col-md-3">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2" style="float: right; color: white;">Tipo de Envío</button><br><br>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" style="float: right; color: white;">Agregar Dirección de Envío</button>
+                </div>
+                <div class="col-md-3">
+                    <form method="POST">
+                        <input type="text" id="cerrada" value="Pagada" style="display: none;">
+                        <input type="text" value="<?php echo $clave_de_nota ?>" id="clavec" name="clave" style="display: none;">
+                        <button onclick="CerrarNota();" class="btn btn-danger" style="float: right; color: white;">Cerrar Nota</button>
+                    </form><br><br>
+                    <form method="POST">
+                        <input type="text" id="guardar" value="Cancelada" style="display: none;">
+                        <input type="text" value="<?php echo $clave_de_nota ?>" id="claveg" name="clave" style="display: none;">
+                        <button onclick="CancelarN(); " class="btn btn-secondary" style="float: right; color: white;">Cancelar Nota</button>
+                    </form>
+                </div>
+                <div class="col-md-3">
                     <button class="btn btn-primary" style="float: right; color: white;" onclick="Export2Doc('exportContent', '<?php echo $clave_de_nota ?>');">Imprimir Nota</button><br><br>
+                    <a href="modificar_n.php?clave_n=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN ?>"><button class="btn btn-success" style="float: right; color: white;">Modificar Nota</button></a>
                 </div>
             </div>
         </div>
@@ -342,18 +386,19 @@ $total_total = $totalG + $envio;
 
 
 <script>
-    function guardarNota() {
+    function CancelarN() {
         var guardar = $('#guardar').val();
         var claveg = $('#claveg').val();
 
         $.ajax({
             type: 'POST',
-            url: 'guardarN.php',
+            url: 'CancelarN.php',
             data: 'guardar=' + guardar + '&claveg=' + claveg,
             dataType: 'html',
             async: false,
             success: function() {
-                alert("Nota Guardada");
+                alert("Nota Cancelada y Eliminada"),
+                window.location.replace("notas.php");
             }
         });
     }

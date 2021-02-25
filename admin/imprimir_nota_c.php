@@ -113,14 +113,14 @@ $total_total = $totalG + $envio;
                     <!-- Consulta -->
                     <div class="col-md-10">
                         
-                        <table id="myTable" class="table table-striped" style="background-color: whitesmoke;">
-                            <thead>
+                        <table id="myTable" class="table table-striped" style="background-color: #edcfcf;">
+                            <thead style="background-color: crimson;">
                                 <tr>
-                                    <th style="text-align: center; color: #f75c96">Producto</th>
-                                    <th style="text-align: center; color: #f75c96">Precio Unitario</th>
-                                    <th style="text-align: center; color: #f75c96">Cantidad</th>
-                                    <th style="text-align: center; color: #f75c96">Total por Producto</th>
-                                    <th style="text-align: center; color: #f75c96"></th>
+                                    <th style="text-align: center; color: #ffffff">Producto</th>
+                                    <th style="text-align: center; color: #ffffff">Precio Unitario</th>
+                                    <th style="text-align: center; color: #ffffff">Cantidad</th>
+                                    <th style="text-align: center; color: #ffffff">Total por Producto</th>
+                                    <th style="text-align: center; color: #ffffff"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -142,7 +142,7 @@ $total_total = $totalG + $envio;
 
 
                                     ?>
-                                        <td style="text-align: center; color:#f75c96; text-transform:uppercase"><?php echo $producto ?></td>
+                                        <td style="text-align: center; color:#000000; text-transform:uppercase"><?php echo $producto ?></td>
                                         <td style="text-align: center;">$<?php echo $precio ?></td>
                                         <td style="text-align: center;"><?php echo $cantidad ?></td>
                                         <td style="text-align: center;">$<?php echo $total ?></td>
@@ -151,7 +151,7 @@ $total_total = $totalG + $envio;
                             <?php
                                     }
                             ?>
-                            <tr style="background-color: white; height:60px">
+                            <tr style=" height:60px">
                                 <td style="text-align: center; color: black">Resumen</td>
                                 <td style="text-align: center; color: black">Total Unitario: $<?php echo $precioG ?></td>
                                 <td style="text-align: center; color: black">Productos Totales: <?php echo $prodG ?></td>

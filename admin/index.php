@@ -36,11 +36,6 @@ include ('../funciones/por_agotarse.php');
 
     <section>
         <div class="container">
-        <div class="row justify-content-center">
-        <div class="col-md-12">
-        <a href="generar_nota.php"><button class="btn btn-warning" style="float: right; color: crimson;">Generar Nota</button></a>
-        </div>
-        </div>
             <div class="row justify-content">
                 <!-- Consulta -->
                 <?php
@@ -61,7 +56,7 @@ include ('../funciones/por_agotarse.php');
                 <br><br>
                     <p style="color: white; height:70px; font-size:22px"><?php echo $nombre_p ?></p>
                     <div class="card">
-                        <img src="../<?php echo $foto_p ?>" style="width:100%; height:auto" alt="">
+                        <img src="../<?php echo $foto_p ?>" style="width:100%; height:180px" alt="">
                         <p>En Existencia: <?php echo por_agotarse($cantidad_p) ?></p>
                         <p>Mayoreo: $<?php echo $precio ?></p>
                         <p>Menudeo: $<?php echo $precio_m ?></p>
