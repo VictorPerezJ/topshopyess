@@ -1,11 +1,18 @@
 <?php
 
-if ($statusn=='Cerrada') {
-    // echo'<script language="javascript">alert("No cuentas con permisos suficientes :)");</script>';
-    echo "<script>window.location='imprimir_nota_c.php?clave=$clave_de_nota';</script>";
-   
-   }else{
- //   echo "<script>window.location='registro.php';</script>";
- }
+ function Pagada($statusn){
+	
+		if($statusn=='Pagada'){
+			return '<form method="POST" action="EnviarN.php">
+      <input type="text" id="enviar" name="enviar" value="Enviada" style="display: none;">
+      <input type="text" value="$clave_de_nota" id="clavee" name="clavee" style="display: none;">
+      <input type="submit" value="Marcar Como Enviada" class="btn btn-danger" style="float: right; color: white;">
+      
+  </form><br><br>';
+			
+		}else{
+			return '';
+		}
+	}
 
 ?>

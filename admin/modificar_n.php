@@ -37,6 +37,7 @@ $clave_de_nota =$_GET['clave_n'];
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
+
 <body style="background-color: #f75c96;">
     <?php include('menu.php'); ?>
 
@@ -67,13 +68,14 @@ $clave_de_nota =$_GET['clave_n'];
                     $precio_m = $row['precio_m'];
                     $foto_p = $row['foto'];
                 ?>
-                    <div class="col-md-4">
-                        <h2 style="color: white;"><?php echo $nombre_p ?></h2>
+                   <div class="col-md-2">
+                   <br><br>
+                        <p style="color: white; height:70px; font-size:22px"><?php echo $nombre_p ?></p>
                         <div class="card">
-                            <img src="../<?php echo $foto_p ?>" style="width:100%; height:350px" alt="">
-                            <div class="card-body">En Existencia: <?php echo por_agotarse($cantidad_p) ?></div>
-                            <div class="card-body">Precio Mayoreo: $<?php echo $precio ?></div>
-                            <div class="card-body">Precio Menudeo: $<?php echo $precio_m ?></div>
+                            <img src="../<?php echo $foto_p ?>" style="width:100%; height:auto" alt="">
+                            <p>En Existencia: <?php echo por_agotarse($cantidad_p) ?></p>
+                            <p>Mayoreo: $<?php echo $precio ?></p>
+                            <p>Menudeo: $<?php echo $precio_m ?></p>
 
                             <form id="<?php echo $id_p ?>" method="POST"></form>
                             <select id="precio<?php echo $id_p ?>" name="precio" required>
@@ -90,7 +92,7 @@ $clave_de_nota =$_GET['clave_n'];
 
                             <input id="vendedor<?php echo $id_p ?>" type="text" name="vendedor" style="display: none;" value="<?php echo $_SESSION['user']; ?>">
 
-                            <button onclick="agregarANota(<?php echo $id_p?>)" id="btn<?php echo $id_p?>" class='btn btn-primary' style="width:100%"><i class="fas fa-sync"></i> Agregar</button></a>
+                            <button onclick="agregarANota(<?php echo $id_p ?>)" id="btn<?php echo $id_p ?>" class='btn btn-primary' style="width:100%"><i class="fas fa-sync"></i> Agregar</button></a>
                             </form>
                         </div>
                     </div>
