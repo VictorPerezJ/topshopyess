@@ -21,6 +21,7 @@ while ($row = mysqli_fetch_assoc($resultadop)) {
     $nota = $row['nota'];
     $fecha = $row['fecha'];
     $statusn = $row['statusn'];
+    
     $tipoDeEnvio = $row['tipo_env'];
     $total = $precio * $cantidad;
 
@@ -44,6 +45,7 @@ while ($row = mysqli_fetch_assoc($resultadode)) {
     $colonia = $row['colonia'];
     $cp = $row['cp'];
     $tel = $row['tel'];
+    $refe=$row['referencias'];
 }
 
 $queryEnvvio="SELECT * FROM tab_env WHERE '$totalG' > rango AND '$totalG' < rango2 AND tipo='$tipoDeEnvio'";
@@ -109,6 +111,7 @@ $total_total = $totalG + $envio;
                         <h3>Colonia: <span style="text-decoration: underline;"><?php echo $colonia ?></span></h3>
                         <h3>Código Postal: <span style="text-decoration: underline;"><?php echo $cp ?></span></h3>
                         <h3>Teléfono: <span style="text-decoration: underline;"><?php echo $tel ?></span></h3>
+                        <h3>Referencias: <span style="text-decoration: underline;"><?php echo $refe ?></span></h3>
                         <h3>Tipo de Envío: <span style="text-decoration: underline;"><?php echo $tipoDeEnvio ?></span></h3>
                     </div>
 
@@ -121,6 +124,7 @@ $total_total = $totalG + $envio;
                                     <th style="text-align: center; color: #ffffff">Producto</th>
                                     <th style="text-align: center; color: #ffffff">Precio Unitario</th>
                                     <th style="text-align: center; color: #ffffff">Cantidad</th>
+                                    <th style="text-align: center; color: #ffffff">Especificaciones</th>
                                     <th style="text-align: center; color: #ffffff">Total por Producto</th>
                                 </tr>
                             </thead>
@@ -139,6 +143,7 @@ $total_total = $totalG + $envio;
                                         $nota = $row['nota'];
                                         $fecha = $row['fecha'];
                                         $statusn = $row['statusn'];
+                                        $coment = $row['coment'];
                                         $total = $precio * $cantidad;
 
 
@@ -146,6 +151,7 @@ $total_total = $totalG + $envio;
                                         <td style="text-align: center; color:#000000; text-transform:uppercase"><?php echo $producto ?></td>
                                         <td style="text-align: center;">$<?php echo $precio ?></td>
                                         <td style="text-align: center;"><?php echo $cantidad ?></td>
+                                        <td style="text-align: center;"><?php echo $coment ?></td>
                                         <td style="text-align: center;">$<?php echo $total ?></td>
                                 </tr>
                             <?php

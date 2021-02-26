@@ -9,8 +9,9 @@ $colonia=$_POST['colonia'];
 $cp=$_POST['cp'];
 $tel=$_POST['tel'];
 $clave=$_POST['clave'];
+$refe=$_POST['refe'];
 
-$agregar="INSERT INTO dir_env SET recibe='$recibe', ciudadEdo='$ciudadEdo', calle='$calle', colonia='$colonia', cp='$cp', tel='$tel', clave='$clave'";
+$agregar="INSERT INTO dir_env SET recibe='$recibe', ciudadEdo='$ciudadEdo', calle='$calle', colonia='$colonia', cp='$cp', tel='$tel', clave='$clave', referencias='$refe'";
 
 $actualizado=mysqli_query($conexion, $agregar);
 

@@ -22,8 +22,8 @@ while ($row = mysqli_fetch_assoc($resultadop)) {
     $nota = $row['nota'];
     $fecha = $row['fecha'];
     $statusn = $row['statusn'];
-    $coment = $row['coment'];
-    $tipoDeEnvio = $row['tipo_env'];
+    
+    $tipoDeEnvio = $row['tipov'];
     $total = $precio * $cantidad;
 
     $totalG += $total;
@@ -46,6 +46,7 @@ while ($row = mysqli_fetch_assoc($resultadode)) {
     $colonia = $row['colonia'];
     $cp = $row['cp'];
     $tel = $row['tel'];
+    $refe=$row['referencias'];
 }
 if ($statusn == 'Pagada') {
     echo "<script>window.location='imprimir_nota_c.php?clave=$clave_de_nota&#myTable';</script>";
@@ -93,6 +94,7 @@ $total_total = $totalG + $envio;
     <?php include('menu.php'); ?>
 
     <section>
+    <?php echo $tipoN; ?>
         <div class="container">
 
             <div id="exportContent">
@@ -115,6 +117,7 @@ $total_total = $totalG + $envio;
                         <h3>Colonia: <span style="text-decoration: underline;"><?php echo $colonia ?></span></h3>
                         <h3>Código Postal: <span style="text-decoration: underline;"><?php echo $cp ?></span></h3>
                         <h3>Teléfono: <span style="text-decoration: underline;"><?php echo $tel ?></span></h3>
+                        <h3>Referencias: <span style="text-decoration: underline;"><?php echo $refe ?></span></h3>
                         <h3>Tipo de Envío: <span style="text-decoration: underline;"><?php echo $tipoDeEnvio ?></span></h3>
                     </div>
 
@@ -150,6 +153,7 @@ $total_total = $totalG + $envio;
                                         $nota = $row['nota'];
                                         $fecha = $row['fecha'];
                                         $statusn = $row['statusn'];
+                                        $coment = $row['coment'];
                                         $total = $precio * $cantidad;
 
                                     ?>
@@ -198,7 +202,6 @@ $total_total = $totalG + $envio;
 
                 <!-- Dirección de Envio -->
             </div>
-            <div class="row justify-content-center"></div>
             <!-- Fin de Esportacion de word -->
 
             <div class="row justify-content-center">
@@ -247,7 +250,7 @@ $total_total = $totalG + $envio;
                 </div>
                 <div class="col-md-3">
                     <button class="btn btn-primary" style="float: right; color: white;" onclick="Export2Doc('exportContent', '<?php echo $clave_de_nota ?>');">Imprimir Nota</button><br><br>
-                    <a href="modificar_n.php?clave_n=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN?>"><button class="btn btn-success" style="float: right; color: white;">Modificar Nota</button></a>
+                    <a href="modificar_n.php?clave_n=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN;?>"><button class="btn btn-success" style="float: right; color: white;">Modificar Nota</button></a>
                 </div>
             </div>
         </div>
@@ -280,7 +283,9 @@ $total_total = $totalG + $envio;
                     <label>Código Postal</label>
                     <input type="text" id="val5" name="input_oculto5"><br><br>
                     <label>Teléfono</label>
-                    <input type="text" id="val6" name="input_oculto6"><br><br>
+                    <input type="text" id="val6" name="input_oculto6" minlength="10" maxlength="10"><br><br>
+                    <label>Referencias</label>
+                    <input type="text" id="val8" name="input_oculto8"><br><br>
                     <input type="text" id="val7" value="<?php echo $clave_de_nota ?>" name="input_oculto7" style="display: none;"><br><br>
                     <button onclick="AgregarDir();" class="btn btn-secondary" style="float: right; color: white;">Agregar Dirección</button>
                 </div>
@@ -294,11 +299,12 @@ $total_total = $totalG + $envio;
                     var cp = $('#val5').val();
                     var tel = $('#val6').val();
                     var clave = $('#val7').val();
+                    var refe = $('#val8').val();
 
                     $.ajax({
                         type: 'POST',
                         url: 'agregarDir.php',
-                        data: 'recibe=' + recibe + '&ciudadEdo=' + ciudadEdo + '&calle=' + calle + '&colonia=' + colonia + '&cp=' + cp + '&tel=' + tel + '&clave=' + clave,
+                        data: 'recibe=' + recibe + '&ciudadEdo=' + ciudadEdo + '&calle=' + calle + '&colonia=' + colonia + '&cp=' + cp + '&tel=' + tel + '&clave=' + clave + '&refe=' + refe,
                         dataType: 'html',
                         async: false,
                         success: function() {

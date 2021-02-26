@@ -58,7 +58,7 @@ $clave_de_nota = $_GET['clave_n'];
                 <?php
                 switch ($precio_nota) {
                     case "menudeo":
-                        $query = "SELECT * FROM catalogo ORDER BY id DESC";
+                        $query = "SELECT * FROM catalogo WHERE cantidad > 0 ORDER BY id DESC";
                         //$resultado=$conexion->query($query);
                         $resultado = mysqli_query($conexion, $query);
                         session_start();
@@ -186,9 +186,16 @@ $clave_de_nota = $_GET['clave_n'];
             data: 'id=' + id + '&precio=' + precio + '&cantidad=' + cantidad + '&nota=' + nota + '&producto=' + producto + '&vendedor=' + vendedor + '&coment=' +coment + '&tipov=' +tipov,
             dataType: 'html',
             async: false,
-            success: function() {
+            success: function respuesta(response) {
+                if(response=='no'){
+                alert("No puedes agregar mas productos de los existentes");
+                location.reload();
+                console.log(response);
+            }else{
                 alert("Producto Agregado");
                 location.reload();
+                console.log(response);
+            }
             }
         });
     }

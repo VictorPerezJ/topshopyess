@@ -68,7 +68,7 @@ label{
                             <tr>
                                 <?php
 
-                                $query = "SELECT * FROM catalogo WHERE cantidad > '0' ORDER BY cantidad ASC";
+                                $query = "SELECT * FROM catalogo WHERE cantidad = '0' ORDER BY id ASC";
                                 //$resultado=$conexion->query($query);
                                 $resultado = mysqli_query($conexion, $query);
                                 session_start();

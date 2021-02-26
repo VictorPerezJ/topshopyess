@@ -22,6 +22,7 @@ while ($row = mysqli_fetch_assoc($resultadop)) {
     $nota = $row['nota'];
     $fecha = $row['fecha'];
     $statusn = $row['statusn'];
+    
     $tipoDeEnvio = $row['tipo_env'];
     $tipoN = $row['tipov'];
     $total = $precio * $cantidad;
@@ -49,6 +50,7 @@ while ($row = mysqli_fetch_assoc($resultadode)) {
     $colonia = $row['colonia'];
     $cp = $row['cp'];
     $tel = $row['tel'];
+    $refe=$row['referencias'];
 }
 $queryEnvvio = "SELECT * FROM tab_env WHERE '$totalG' > rango AND '$totalG' < rango2 AND tipo='$tipoDeEnvio'";
 $resultadoEnvio = mysqli_query($conexion, $queryEnvvio);
@@ -120,6 +122,7 @@ if ($statusn == 'Pagada') {
                         <h3>Colonia: <span style="text-decoration: underline;"><?php echo $colonia ?></span></h3>
                         <h3>Código Postal: <span style="text-decoration: underline;"><?php echo $cp ?></span></h3>
                         <h3>Teléfono: <span style="text-decoration: underline;"><?php echo $tel ?></span></h3>
+                        <h3>Referencias: <span style="text-decoration: underline;"><?php echo $refe ?></span></h3>
                         <h3>Tipo de Envío: <span style="text-decoration: underline;"><?php echo $tipoDeEnvio ?></span></h3>
                     </div>
 
@@ -132,6 +135,7 @@ if ($statusn == 'Pagada') {
                                     <th style="text-align: center; color: #ffffff">Producto</th>
                                     <th style="text-align: center; color: #ffffff">Precio Unitario</th>
                                     <th style="text-align: center; color: #ffffff">Cantidad</th>
+                                    <th style="text-align: center; color: #ffffff">Especificaciones</th>
                                     <th style="text-align: center; color: #ffffff">Total por Producto</th>
                                     <th style="text-align: center; color: #ffffff"></th>
                                     <th style="text-align: center; color: #ffffff"></th>
@@ -152,6 +156,7 @@ if ($statusn == 'Pagada') {
                                         $nota = $row['nota'];
                                         $fecha = $row['fecha'];
                                         $statusn = $row['statusn'];
+                                        $coment = $row['coment'];
                                         $total = $precio * $cantidad;
 
 
@@ -159,6 +164,7 @@ if ($statusn == 'Pagada') {
                                         <td style="text-align: center; color:#000000; text-transform:uppercase"><?php echo $producto ?></td>
                                         <td style="text-align: center;">$<?php echo $precio ?></td>
                                         <td style="text-align: center;"><?php echo $cantidad ?></td>
+                                        <td style="text-align: center;"><?php echo $coment?></td>
                                         <td style="text-align: center;">$<?php echo $total ?></td>
                                         <td style="text-align: center;"><a href="eliminarProd.php?id=<?php echo $id_p?>&cantidad=<?php echo $cantidad ?>&producto=<?php echo $producto?>&clave=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN ?>"><button><i class="fas fa-minus" style="color:red"></i></button></a></td>
                                         <td style="text-align: center;">
@@ -171,6 +177,7 @@ if ($statusn == 'Pagada') {
                                     }
                             ?>
                             <tr style=" height:60px">
+                            <td></td>
                                 <td style="text-align: center; color: black">Resumen</td>
                                 <td style="text-align: center; color: black">Total Unitario: $<?php echo $precioG ?></td>
                                 <td style="text-align: center; color: black">Productos Totales: <?php echo $prodG ?></td>
@@ -178,6 +185,7 @@ if ($statusn == 'Pagada') {
                             </tr>
                             <tr>
                                 <td style="text-align: center;"></td>
+                                <td></td>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;">Gastos de Envío</td>
                                 <td style="text-align: center;">$<?php echo $envio ?></td>
@@ -185,6 +193,7 @@ if ($statusn == 'Pagada') {
                             <tr>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
+                                <td></td>
                                 <td style="text-align: center; background-color:green; color:white">Total con Envío</td>
                                 <td style="text-align: center; background-color:green; color:white">$<?php echo $total_total = $totalG + $envio ?></td>
                             </tr>
@@ -272,7 +281,9 @@ if ($statusn == 'Pagada') {
                     <label>Código Postal</label>
                     <input type="text" id="val5" name="input_oculto5"><br><br>
                     <label>Teléfono</label>
-                    <input type="text" id="val6" name="input_oculto6"><br><br>
+                    <input type="text" id="val6" name="input_oculto6" minlength="10" maxlength="10"><br><br>
+                    <label>Referencias</label>
+                    <input type="text" id="val8" name="input_oculto8"><br><br>
                     <input type="text" id="val7" value="<?php echo $clave_de_nota ?>" name="input_oculto7" style="display: none;"><br><br>
                     <button onclick="AgregarDir();" class="btn btn-secondary" style="float: right; color: white;">Agregar Dirección</button>
                 </div>
@@ -286,11 +297,12 @@ if ($statusn == 'Pagada') {
                     var cp = $('#val5').val();
                     var tel = $('#val6').val();
                     var clave = $('#val7').val();
+                    var refe = $('#val8').val();
 
                     $.ajax({
                         type: 'POST',
                         url: 'agregarDir.php',
-                        data: 'recibe=' + recibe + '&ciudadEdo=' + ciudadEdo + '&calle=' + calle + '&colonia=' + colonia + '&cp=' + cp + '&tel=' + tel + '&clave=' + clave,
+                        data: 'recibe=' + recibe + '&ciudadEdo=' + ciudadEdo + '&calle=' + calle + '&colonia=' + colonia + '&cp=' + cp + '&tel=' + tel + '&clave=' + clave + '&refe=' + refe,
                         dataType: 'html',
                         async: false,
                         success: function() {

@@ -18,6 +18,11 @@ $existentes="SELECT * FROM catalogo WHERE nombre_p='$producto'";
         $id_p = $row['id'];
     } 
 
+    if($cantidad_exis == 0){
+        echo'<script language="javascript">alert("No puedes agregar mas producto");</script>'; 
+        echo "<script>window.location='imprimir_nota.php?clave=$clave_de_nota&tipoN=$tipoN#myTable';</script>";
+    }else{
+
     $cantidadt=$cantidad_exis-1;
 
     $restar="UPDATE catalogo SET cantidad='$cantidadt' WHERE id='$id_p'";
@@ -38,11 +43,12 @@ if($agregado>0){
     $sumar2="UPDATE notas SET cantidad='$cantidadt2' WHERE id='$id_p'";
 
     $agregado2=mysqli_query($conexion, $sumar2);
-    echo "<script>window.location='imprimir_nota.php?clave=$clave_de_nota&tipoN=$tipoN&#myTable';</script>";
+    echo "<script>window.location='imprimir_nota.php?clave=$clave_de_nota&tipoN=$tipoN#myTable';</script>";
          
 }else{
     echo'<script language="javascript">alert("Los datos no se cargaron correctamente, favor de llamar a soporte :(");</script>'; 
     
+}
 }
 
 mysqli_close($conexion);

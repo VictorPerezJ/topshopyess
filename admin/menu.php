@@ -6,6 +6,7 @@ ob_start(); ?>
     <a href="index.php"><img src="../img/logo.jpeg" style="width:70%" alt=""></a>
     <a href="#"><?php echo $_SESSION['user']?></a>
     <a href="index.php">Catalogo</a>
+    <a href="agotado.php">Agotado</a>
     <a href="agregar_p.php">Agregar Producto</a>
     <a href="list_clientes.php">Clientes</a>
     <a href="agregar_cliente.php">Agregar Cliente</a>

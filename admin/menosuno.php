@@ -32,14 +32,21 @@ if($agregado>0){
         $cantidad_exis2 = $row['cantidad'];
         $id_p = $row['id'];
     } 
-
+if($cantidad_exis2 > 0){
     $cantidadt2=$cantidad_exis2-1;
 
     $sumar2="UPDATE notas SET cantidad='$cantidadt2' WHERE id='$id_p'";
 
     $agregado2=mysqli_query($conexion, $sumar2);
-    echo "<script>window.location='imprimir_nota.php?clave=$clave_de_nota&tipoN=$tipoN&#myTable';</script>";
-         
+
+    if($cantidadt2 == 0){
+        $eliminar="DELETE FROM notas WHERE id='$id_p'";
+    
+    $actualizado=mysqli_query($conexion, $eliminar);
+        echo "<script>window.location='imprimir_nota.php?clave=$clave_de_nota&tipoN=$tipoN#myTable';</script>";
+    }
+    echo "<script>window.location='imprimir_nota.php?clave=$clave_de_nota&tipoN=$tipoN#myTable';</script>";
+}
 }else{
     echo'<script language="javascript">alert("Los datos no se cargaron correctamente, favor de llamar a soporte :(");</script>'; 
     

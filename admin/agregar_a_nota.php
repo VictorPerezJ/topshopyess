@@ -15,6 +15,17 @@ $tipov=$_POST['tipov'];
 
 $fecha = date("Y-m-d");
 
+$consulta = "SELECT * FROM catalogo WHERE nombre_p='$producto'";
+$respuesta = mysqli_query($conexion, $consulta);
+session_start();
+while ($row = mysqli_fetch_assoc($respuesta)) {
+    $existente = $row['cantidad'];
+}
+
+if($cantidad > $existente){
+    echo "no";
+}else{
+    // echo "si";
 $agregar="INSERT INTO notas SET producto='$producto', precio='$precio', vendedor='$vendedor', nota='$nota', cantidad='$cantidad', fecha='$fecha', coment='$coment', tipov='$tipov'";
 
 $actualizado=mysqli_query($conexion, $agregar);
@@ -35,6 +46,9 @@ $actualizado_c = mysqli_query($conexion, $actulizar_can_pro);
 }else{
     echo'<script language="javascript">alert("Los datos no se cargaron correctamente, favor de llamar a soporte :(");</script>'; 
     
+}
+
+      
 }
 
 mysqli_close($conexion);

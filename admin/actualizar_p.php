@@ -52,7 +52,7 @@ while ($row = mysqli_fetch_assoc($resultado)) {
                 <h3 style="text-align: center;">Actualización del Producto <?php echo $nombre_p;?></h3><br>
                 <form action="actualizar_info.php?id=<?php echo $id_act?>" method="post">
                 <label>Nombre del Producto</label><input type="text" class="w3-input" value="<?php echo $nombre_p;?>" name="nombre" placeholder="Nombre del Producto">
-                <label>Cantidad del Producto</label><input type="text" class="w3-input" value="<?php echo $cantidad_p;?>" name="cantidad" placeholder="Cantidad del Producto">
+                <label>Cantidad del Producto</label><input type="text" class="w3-input" value="<?php //echo $cantidad_p;?>" name="cantidad" placeholder="Cantidad del Producto">
                 <label>Precio Normal del Producto</label><input type="text" class="w3-input" value="<?php echo $precio;?>" name="precio_n" placeholder="Precio Normal del Producto">
                 <label>Precio Mayoreo del Producto</label><input type="text" class="w3-input" value="<?php echo $precio_m;?>" name="precio_m" placeholder="Precio Mayoreo del Producto"><br>
                 <input type="submit" class="btn btn-success" value="Actualizar Datos">
