@@ -113,14 +113,13 @@ $total_total = $totalG + $envio;
                     <!-- Consulta -->
                     <div class="col-md-10">
                         
-                        <table id="myTable" class="table table-striped" style="background-color: #edcfcf;">
-                            <thead style="background-color: crimson;">
+                        <table id="myTable" class="table table-striped" style="background-color: white;">
+                            <thead style="background-color: #eb81a7;">
                                 <tr>
                                     <th style="text-align: center; color: #ffffff">Producto</th>
                                     <th style="text-align: center; color: #ffffff">Precio Unitario</th>
                                     <th style="text-align: center; color: #ffffff">Cantidad</th>
                                     <th style="text-align: center; color: #ffffff">Total por Producto</th>
-                                    <th style="text-align: center; color: #ffffff"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -146,7 +145,6 @@ $total_total = $totalG + $envio;
                                         <td style="text-align: center;">$<?php echo $precio ?></td>
                                         <td style="text-align: center;"><?php echo $cantidad ?></td>
                                         <td style="text-align: center;">$<?php echo $total ?></td>
-                                        <td style="text-align: center;"><button onclick="eliminarProd(<?php echo $id_p ?>)" id="btn<?php echo $id_p ?>"><i class="fas fa-minus" style="color:red"></i></button></td>
                                 </tr>
                             <?php
                                     }

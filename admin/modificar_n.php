@@ -86,11 +86,15 @@ $clave_de_nota = $_GET['clave_n'];
 
                                     <input id="cantidad<?php echo $id_p ?>" type="text" name="cantidad" placeholder="Cantidad" required>
 
+                                    <textarea cols="30" rows="3" id="coment<?php echo $id_p ?>" type="text" name="coment" placeholder="Especificaciones" ></textarea>
+
                                     <input id="nota<?php echo $id_p ?>" type="text" name="nota" style="display: none;" value="<?php echo $clave_de_nota ?>">
 
                                     <input id="producto<?php echo $id_p ?>" type="text" name="producto" style="display: none;" value="<?php echo $nombre_p ?>">
 
                                     <input id="vendedor<?php echo $id_p ?>" type="text" name="vendedor" style="display: none;" value="<?php echo $_SESSION['user']; ?>">
+
+                                    <input id="tipov<?php echo $id_p ?>" type="text" name="tipov" style="display: none;" value="<?php echo $precio_nota; ?>" >
 
                                     <button onclick="agregarANota(<?php echo $id_p ?>)" id="btn<?php echo $id_p ?>" class='btn btn-primary' style="width:100%"><i class="fas fa-sync"></i> Agregar</button></a>
                                     </form>
@@ -128,11 +132,15 @@ $clave_de_nota = $_GET['clave_n'];
 
                                     <input id="cantidad<?php echo $id_p ?>" type="text" name="cantidad" placeholder="Cantidad" required>
 
+                                    <textarea cols="30" rows="3" id="coment<?php echo $id_p ?>" type="text" name="coment" placeholder="Especificaciones" ></textarea>
+
                                     <input id="nota<?php echo $id_p ?>" type="text" name="nota" style="display: none;" value="<?php echo $clave_de_nota ?>">
 
                                     <input id="producto<?php echo $id_p ?>" type="text" name="producto" style="display: none;" value="<?php echo $nombre_p ?>">
 
                                     <input id="vendedor<?php echo $id_p ?>" type="text" name="vendedor" style="display: none;" value="<?php echo $_SESSION['user']; ?>">
+
+                                    <input id="tipov<?php echo $id_p ?>" type="text" name="tipov" style="display: none;" value="<?php echo $precio_nota; ?>" >
 
                                     <button onclick="agregarANota(<?php echo $id_p ?>)" id="btn<?php echo $id_p ?>" class='btn btn-primary' style="width:100%"><i class="fas fa-sync"></i> Agregar</button></a>
                                     </form>
@@ -168,12 +176,14 @@ $clave_de_nota = $_GET['clave_n'];
         var nota = $('#nota' + str).val();
         var producto = $('#producto' + str).val();
         var vendedor = $('#vendedor' + str).val();
+        var coment = $('#coment' + str).val();
+        var tipov = $('#tipov' + str).val();
 
 
         $.ajax({
             type: 'POST',
             url: 'agregar_a_nota.php',
-            data: 'id=' + id + '&precio=' + precio + '&cantidad=' + cantidad + '&nota=' + nota + '&producto=' + producto + '&vendedor=' + vendedor,
+            data: 'id=' + id + '&precio=' + precio + '&cantidad=' + cantidad + '&nota=' + nota + '&producto=' + producto + '&vendedor=' + vendedor + '&coment=' +coment + '&tipov=' +tipov,
             dataType: 'html',
             async: false,
             success: function() {

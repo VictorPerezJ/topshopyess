@@ -66,7 +66,7 @@ ob_start();
                                                 <tbody>
                                                     <tr>
                                                         <?php
-                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Abierta' ORDER BY nota ASC";
+                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Abierta' AND cliente IS NOT NULL ORDER BY nota ASC";
                                                         //$resultado=$conexion->query($query);
                                                         $resultado = mysqli_query($conexion, $query);
                                                         session_start();
@@ -92,7 +92,7 @@ ob_start();
                                                             <td style="text-align: center;"><?php echo $nota ?></td>
                                                             <td style="text-align: center;"><?php echo $vendedor ?></td>
                                                             <td style="text-align: center;"><?php echo $status ?></td>
-                                                            <td style="text-align: center;"><a href="imprimir_nota.php?clave=<?php echo $nota ?>"><button class="btn btn-success">Ver Nota</button></a></td>
+                                                            <td style="text-align: center;"><a href="imprimir_nota.php?clave=<?php echo $nota?>"><button class="btn btn-success">Ver Nota</button></a></td>
                                                     </tr>
                                                 <?php
                                                         }
@@ -131,7 +131,7 @@ ob_start();
                                                 <tbody>
                                                     <tr>
                                                         <?php
-                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Pagada' ORDER BY nota ASC";
+                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Pagada' AND cliente IS NOT NULL ORDER BY nota ASC";
                                                         //$resultado=$conexion->query($query);
                                                         $resultado = mysqli_query($conexion, $query);
                                                         session_start();
@@ -196,7 +196,7 @@ ob_start();
                                                 <tbody>
                                                     <tr>
                                                         <?php
-                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Enviada' ORDER BY nota ASC";
+                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Enviada' AND cliente IS NOT NULL ORDER BY nota ASC";
                                                         //$resultado=$conexion->query($query);
                                                         $resultado = mysqli_query($conexion, $query);
                                                         session_start();
@@ -223,6 +223,71 @@ ob_start();
                                                             <td style="text-align: center;"><?php echo $vendedor ?></td>
                                                             <td style="text-align: center;"><?php echo $status ?></td>
                                                             <td style="text-align: center;"><a href="imprimir_nota_c_.php?clave=<?php echo $nota ?>"><button class="btn btn-success">Ver Nota</button></a></td>
+                                                    </tr>
+                                                <?php
+                                                        }
+                                                ?>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseFor">
+                                    Notas Sin Asignar
+                                </a>
+                            </div>
+                            <div id="collapseFor" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row justify-content-center">
+                                        <!-- Consulta -->
+                                        <div class="col-md-12">
+                                            <p><img src="https://topshopyess.com/img/logom.jpg" style="width: 10%; height:auto; display:block; position:static" alt=""></p>
+                                            <h2 style="color: black;">Listado de Notas</h2>
+                                            <table id="myTable" class="table table-striped" style="background-color: whitesmoke;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: center;">Cliente</th>
+                                                        <th style="text-align: center;">Clave de Nota</th>
+                                                        <th style="text-align: center;">Vendedor</th>
+                                                        <th style="text-align: center;">Estatus</th>
+                                                        <th style="text-align: center;">Ver</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <?php
+                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn IS NULL ORDER BY nota ASC";
+                                                        //$resultado=$conexion->query($query);
+                                                        $resultado = mysqli_query($conexion, $query);
+                                                        session_start();
+                                                        //while($row=$resultado->fetch_assoc()){
+                                                        while ($row = mysqli_fetch_assoc($resultado)) {
+                                                            $id_p = $row['id'];
+                                                            $producto = $row['producto'];
+                                                            $precio = $row['precio'];
+                                                            $cliente = $row['cliente'];
+                                                            $cantidad = $row['cantidad'];
+                                                            $nota = $row['nota'];
+                                                            $fecha = $row['fecha'];
+                                                            $vendedor = $row['vendedor'];
+                                                            $status = $row['statusn'];
+                                                            $total = $precio * $cantidad;
+
+                                                            $totalG += $total;
+                                                            $precioG += $precio;
+                                                            $prodG += $cantidad;
+
+                                                        ?>
+                                                            <td style="text-align: center;"><?php echo $cliente ?></td>
+                                                            <td style="text-align: center;"><?php echo $nota ?></td>
+                                                            <td style="text-align: center;"><?php echo $vendedor ?></td>
+                                                            <td style="text-align: center;"><?php echo $status ?></td>
+                                                            <td style="text-align: center;"><a href="imprimir_nota.php?clave=<?php echo $nota ?>"><button class="btn btn-success">Ver Nota</button></a></td>
                                                     </tr>
                                                 <?php
                                                         }

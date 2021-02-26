@@ -10,10 +10,12 @@ $cantidad=$_POST['cantidad'];
 $nota=$_POST['nota'];
 $producto=$_POST['producto'];
 $vendedor=$_POST['vendedor'];
+$coment=$_POST['coment'];
+$tipov=$_POST['tipov'];
 
 $fecha = date("Y-m-d");
 
-$agregar="INSERT INTO notas SET producto='$producto', precio='$precio', vendedor='$vendedor', nota='$nota', cantidad='$cantidad', fecha='$fecha'";
+$agregar="INSERT INTO notas SET producto='$producto', precio='$precio', vendedor='$vendedor', nota='$nota', cantidad='$cantidad', fecha='$fecha', coment='$coment', tipov='$tipov'";
 
 $actualizado=mysqli_query($conexion, $agregar);
 

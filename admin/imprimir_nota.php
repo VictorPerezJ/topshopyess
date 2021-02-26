@@ -22,6 +22,7 @@ while ($row = mysqli_fetch_assoc($resultadop)) {
     $nota = $row['nota'];
     $fecha = $row['fecha'];
     $statusn = $row['statusn'];
+    $coment = $row['coment'];
     $tipoDeEnvio = $row['tipo_env'];
     $total = $precio * $cantidad;
 
@@ -47,9 +48,9 @@ while ($row = mysqli_fetch_assoc($resultadode)) {
     $tel = $row['tel'];
 }
 if ($statusn == 'Pagada') {
-    echo "<script>window.location='imprimir_nota_c.php?clave=$clave_de_nota&tipoN=$tipoN';</script>";
+    echo "<script>window.location='imprimir_nota_c.php?clave=$clave_de_nota&#myTable';</script>";
 } elseif($statusn == 'Abierta') {
-    echo "<script>window.location='imprimir_nota_cc.php?clave=$clave_de_nota&tipoN=$tipoN';</script>";
+    echo "<script>window.location='imprimir_nota_cc.php?clave=$clave_de_nota&#myTable';</script>";
 }
 
 $queryEnvvio="SELECT * FROM tab_env WHERE '$totalG' > rango AND '$totalG' < rango2 AND tipo='$tipoDeEnvio'";
@@ -122,13 +123,15 @@ $total_total = $totalG + $envio;
                         <!-- <p><img src="https://topshopyess.com/img/logom.jpg" style="width: 5%; height:auto; display:block; position:static" alt=""></p> -->
 
                         <!-- <h2 style="color: black;">Numero de Nota: <?php echo $clave_de_nota ?></h2> -->
-                        <table id="myTable" class="table table-striped" style="background-color: #edcfcf;">
-                            <thead style="background-color: crimson;">
+                        <table id="myTable" class="table table-striped" style="background-color: white;">
+                            <thead style="background-color: #eb81a7;">
                                 <tr>
                                     <th style="text-align: center; color: #ffffff">Producto</th>
                                     <th style="text-align: center; color: #ffffff">Precio Unitario</th>
                                     <th style="text-align: center; color: #ffffff">Cantidad</th>
+                                    <th style="text-align: center; color: #ffffff">Especificaciones</th>
                                     <th style="text-align: center; color: #ffffff">Total por Producto</th>
+                                    <th style="text-align: center; color: #ffffff"></th>
                                     <th style="text-align: center; color: #ffffff"></th>
                                 </tr>
                             </thead>
@@ -153,17 +156,22 @@ $total_total = $totalG + $envio;
                                         <td style="text-align: center; color:black; text-transform:uppercase"><?php echo $producto ?></td>
                                         <td style="text-align: center;">$<?php echo $precio ?></td>
                                         <td style="text-align: center;"><?php echo $cantidad ?></td>
+                                        <td style="text-align: center;"><?php echo $coment ?></td>
                                         <td style="text-align: center;">$<?php echo $total ?></td>
                                         <td style="text-align: center;">
-                                        <!-- <button onclick="eliminarProd(<?php //echo $id_p?>)" id="btn<?php //echo $id_p ?>"><i class="fas fa-minus" style="color:red"></i></button> -->
-                                        <a href="eliminarProd.php?id=<?php echo $id_p?>&cantidad=<?php echo $cantidad ?>&producto=<?php echo $producto?>&clave=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN ?>"><button><i class="fas fa-minus" style="color:red"></i></button></a>
+                                        <a href="eliminarProd.php?id=<?php echo $id_p?>&cantidad=<?php echo $cantidad ?>&producto=<?php echo $producto?>&clave=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN ?>"><button style="border: none;"><i class="fas fa-times" style="color:red"></i></button></a>
                                         </td>
-                                        
+                                        <td style="text-align: center;">
+                                        <a href="masuno.php?id=<?php echo $id_p?>&cantidad=<?php echo $cantidad ?>&producto=<?php echo $producto?>&clave=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN ?>"><button style="border: none;"><i class="fas fa-plus" style="color:blue"></i></button></a>
+
+                                        <a href="menosuno.php?id=<?php echo $id_p?>&cantidad=<?php echo $cantidad ?>&producto=<?php echo $producto?>&clave=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN ?>"><button style="border: none;"><i class="fas fa-minus" style="color:red"></i></button></a>
+                                        </td>
                                 </tr>
                             <?php
                                     }
                             ?>
                             <tr style="height:60px">
+                            <td></td>
                                 <td style="text-align: center; color: black">Resumen</td>
                                 <td style="text-align: center; color: black">Total Unitario: $<?php echo $precioG ?></td>
                                 <td style="text-align: center; color: black">Productos Totales: <?php echo $prodG ?></td>
@@ -172,10 +180,12 @@ $total_total = $totalG + $envio;
                             <tr>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
+                                <td style="text-align: center;"></td>
                                 <td style="text-align: center;">Gastos de Envío</td>
                                 <td style="text-align: center;">$<?php echo $envio ?></td>
                             </tr>
                             <tr>
+                                <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center; background-color:green; color:white">Total con Envío</td>
@@ -230,6 +240,7 @@ $total_total = $totalG + $envio;
                     </form><br><br>
                     <form method="POST">
                         <input type="text" id="guardar" value="Abierta" style="display: none;">
+                        
                         <input type="text" value="<?php echo $clave_de_nota ?>" id="claveg" name="clave" style="display: none;">
                         <button onclick="guardarNota();" class="btn btn-secondary" style="float: right; color: white;">Guardar Nota</button>
                     </form>

@@ -2,9 +2,9 @@
 
 function por_agotarse($cantidad_p){
     if($cantidad_p <= '10'){
-    return '<i style="color:red; font-size:22px; margin-top: 50%">'.$cantidad_p.', Por Agotarse </i>';
+    return '<p style="color:red; font-size:20px;">'.$cantidad_p.' <br> Por Agotarse </p>';
 }else{
-    return '<i style="color:black; font-size:22px; margin-top: 50%">'.$cantidad_p.'</i>';
+    return '<p style="color:black; font-size:20px;">'.$cantidad_p.'</p>';
 }
 }
 

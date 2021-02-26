@@ -5,7 +5,7 @@ include_once('funciones.php');
 session_start();
 ob_start();
 
-$tipoN = $_GET['tipoN'];
+// $tipoN = $_GET['tipoN'];
 $clave_de_nota = $_GET['clave'];
 
 $queryp = "SELECT * FROM notas WHERE nota='$clave_de_nota'";
@@ -23,6 +23,7 @@ while ($row = mysqli_fetch_assoc($resultadop)) {
     $fecha = $row['fecha'];
     $statusn = $row['statusn'];
     $tipoDeEnvio = $row['tipo_env'];
+    $tipoN = $row['tipov'];
     $total = $precio * $cantidad;
 
     $totalG += $total;
@@ -65,6 +66,10 @@ $total_total = $totalG + $envio;
 
 if(empty($producto)){
     echo "<script>window.location='notas.php;</script>";
+}
+
+if ($statusn == 'Pagada') {
+    echo "<script>window.location='imprimir_nota_c.php?clave=$clave_de_nota';</script>";
 }
 ?>
 <!DOCTYPE html>
@@ -121,13 +126,14 @@ if(empty($producto)){
                     <!-- Consulta -->
                     <div class="col-md-10">
 
-                        <table id="myTable" class="table table-striped" style="background-color: #edcfcf;">
-                            <thead style="background-color: crimson;">
+                        <table id="myTable" class="table table-striped" style="background-color: white;">
+                            <thead style="background-color: #eb81a7;">
                                 <tr>
                                     <th style="text-align: center; color: #ffffff">Producto</th>
                                     <th style="text-align: center; color: #ffffff">Precio Unitario</th>
                                     <th style="text-align: center; color: #ffffff">Cantidad</th>
                                     <th style="text-align: center; color: #ffffff">Total por Producto</th>
+                                    <th style="text-align: center; color: #ffffff"></th>
                                     <th style="text-align: center; color: #ffffff"></th>
                                 </tr>
                             </thead>
@@ -155,6 +161,11 @@ if(empty($producto)){
                                         <td style="text-align: center;"><?php echo $cantidad ?></td>
                                         <td style="text-align: center;">$<?php echo $total ?></td>
                                         <td style="text-align: center;"><a href="eliminarProd.php?id=<?php echo $id_p?>&cantidad=<?php echo $cantidad ?>&producto=<?php echo $producto?>&clave=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN ?>"><button><i class="fas fa-minus" style="color:red"></i></button></a></td>
+                                        <td style="text-align: center;">
+                                        <a href="masuno.php?id=<?php echo $id_p?>&cantidad=<?php echo $cantidad ?>&producto=<?php echo $producto?>&clave=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN ?>"><button style="border: none;"><i class="fas fa-plus" style="color:blue"></i></button></a>
+
+                                        <a href="menosuno.php?id=<?php echo $id_p?>&cantidad=<?php echo $cantidad ?>&producto=<?php echo $producto?>&clave=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN ?>"><button style="border: none;"><i class="fas fa-minus" style="color:red"></i></button></a>
+                                        </td>
                                 </tr>
                             <?php
                                     }
