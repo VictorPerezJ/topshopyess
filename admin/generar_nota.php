@@ -68,7 +68,7 @@ $clave_de_nota = $usuario . '00' . $num_n;
                 <?php
                 switch ($precio_nota) {
                     case "menudeo":
-                        $query = "SELECT * FROM catalogo ORDER BY id DESC";
+                        $query = "SELECT * FROM catalogo WHERE cantidad > 0 ORDER BY id DESC";
                         //$resultado=$conexion->query($query);
                         $resultado = mysqli_query($conexion, $query);
                         session_start();

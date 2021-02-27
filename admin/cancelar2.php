@@ -4,8 +4,8 @@ ob_start();
 
 include_once('../conexion.php');
 
-$claveg=$_POST['claveg'];
-$guardar=$_POST['guardar'];
+$claveg=$_POST['clave'];
+$guardar=$_POST['cancelar'];
 
 $asignar="UPDATE notas SET statusn='$guardar' WHERE nota='$claveg'";
 

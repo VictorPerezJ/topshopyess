@@ -62,6 +62,7 @@ label{
                                 <th style="text-align: center;">Costo Menudeo</th>
                                 <th style="text-align: center;">En Existencia</th>
                                 <th style="text-align: center;">Actualizar</th>
+                                <th style="text-align: center;">Eliminar Producto</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,7 +98,10 @@ label{
                                         <p><?php echo por_agotarse($cantidad_p) ?></p>
                                     </td>
                                     <td style="text-align: center;">
-                                        <a href="actualizar_p.php?id=<?php echo $id_p ?>"><button class='btn btn-danger' style="width:100%;width:25%"> <i class="fas fa-sync"></i></button></a>
+                                        <a href="actualizar_p.php?id=<?php echo $id_p ?>"><button class='btn btn-primary' style="width:25%"> <i class="fas fa-sync"></i></button></a>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <a href="eliminarProdInv.php?id=<?php echo $id_p ?>" onclick="javascript:return asegurar();"><button class='btn btn-danger' style=" width:40%">Eliminar</button></a>
                                     </td>
                             </tr>
                         <?php
@@ -127,4 +131,11 @@ $(document).ready(function() {
 } );
 </script>
 
+<script>
+function asegurar ()
+  {
+      rc = confirm("¿Seguro que desea Eliminar?");
+      return rc;
+  }
+</script>
 </html>

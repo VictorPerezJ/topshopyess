@@ -25,6 +25,10 @@ ob_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body style="background-color: #f75c96;">
@@ -34,11 +38,11 @@ ob_start();
         <div class="container">
 
             <div id="exportContent">
-            <div class="row justify-content-center">
-            <h2 style="color: white; text-align:center">Clasificación de Notas</h2>
-            </div><br><br>
                 <div class="row justify-content-center">
-                
+                    <h2 style="color: white; text-align:center">Clasificación de Notas</h2>
+                </div><br><br>
+                <div class="row justify-content-center">
+
                     <div id="accordion">
                         <div class="card">
                             <div class="card-header">
@@ -53,7 +57,7 @@ ob_start();
                                         <div class="col-md-12">
                                             <p><img src="https://topshopyess.com/img/logom.jpg" style="width: 10%; height:auto; display:block; position:static" alt=""></p>
                                             <h2 style="color: black;">Listado de Notas</h2>
-                                            <table id="myTable" class="table table-striped" style="background-color: whitesmoke;">
+                                            <table id="myTable1" class="table table-striped" style="background-color: whitesmoke;">
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center;">Cliente</th>
@@ -66,7 +70,7 @@ ob_start();
                                                 <tbody>
                                                     <tr>
                                                         <?php
-                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Abierta' AND cliente IS NOT NULL ORDER BY nota ASC";
+                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Abierta' AND cliente IS NOT NULL ORDER BY nota DESC";
                                                         //$resultado=$conexion->query($query);
                                                         $resultado = mysqli_query($conexion, $query);
                                                         session_start();
@@ -92,7 +96,7 @@ ob_start();
                                                             <td style="text-align: center;"><?php echo $nota ?></td>
                                                             <td style="text-align: center;"><?php echo $vendedor ?></td>
                                                             <td style="text-align: center;"><?php echo $status ?></td>
-                                                            <td style="text-align: center;"><a href="imprimir_nota.php?clave=<?php echo $nota?>"><button class="btn btn-success">Ver Nota</button></a></td>
+                                                            <td style="text-align: center;"><a href="imprimir_nota.php?clave=<?php echo $nota ?>"><button class="btn btn-success">Ver Nota</button></a></td>
                                                     </tr>
                                                 <?php
                                                         }
@@ -118,7 +122,7 @@ ob_start();
                                         <div class="col-md-12">
                                             <p><img src="https://topshopyess.com/img/logom.jpg" style="width: 10%; height:auto; display:block; position:static" alt=""></p>
                                             <h2 style="color: black;">Listado de Notas</h2>
-                                            <table id="myTable" class="table table-striped" style="background-color: whitesmoke;">
+                                            <table id="myTable2" class="table table-striped" style="background-color: whitesmoke;">
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center;">Cliente</th>
@@ -131,7 +135,7 @@ ob_start();
                                                 <tbody>
                                                     <tr>
                                                         <?php
-                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Pagada' AND cliente IS NOT NULL ORDER BY nota ASC";
+                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Pagada' AND cliente IS NOT NULL ORDER BY nota DESC";
                                                         //$resultado=$conexion->query($query);
                                                         $resultado = mysqli_query($conexion, $query);
                                                         session_start();
@@ -190,13 +194,14 @@ ob_start();
                                                         <th style="text-align: center;">Clave de Nota</th>
                                                         <th style="text-align: center;">Vendedor</th>
                                                         <th style="text-align: center;">Estatus</th>
+                                                        
                                                         <th style="text-align: center;">Ver</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
                                                         <?php
-                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Enviada' AND cliente IS NOT NULL ORDER BY nota ASC";
+                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn='Enviada' AND cliente IS NOT NULL ORDER BY fecha DESC";
                                                         //$resultado=$conexion->query($query);
                                                         $resultado = mysqli_query($conexion, $query);
                                                         session_start();
@@ -208,7 +213,7 @@ ob_start();
                                                             $cliente = $row['cliente'];
                                                             $cantidad = $row['cantidad'];
                                                             $nota = $row['nota'];
-                                                            $fecha = $row['fecha'];
+                                                            $fecha1 = $row['fecha'];
                                                             $vendedor = $row['vendedor'];
                                                             $status = $row['statusn'];
                                                             $total = $precio * $cantidad;
@@ -222,6 +227,7 @@ ob_start();
                                                             <td style="text-align: center;"><?php echo $nota ?></td>
                                                             <td style="text-align: center;"><?php echo $vendedor ?></td>
                                                             <td style="text-align: center;"><?php echo $status ?></td>
+                                                            
                                                             <td style="text-align: center;"><a href="imprimir_nota_c_.php?clave=<?php echo $nota ?>"><button class="btn btn-success">Ver Nota</button></a></td>
                                                     </tr>
                                                 <?php
@@ -248,7 +254,7 @@ ob_start();
                                         <div class="col-md-12">
                                             <p><img src="https://topshopyess.com/img/logom.jpg" style="width: 10%; height:auto; display:block; position:static" alt=""></p>
                                             <h2 style="color: black;">Listado de Notas</h2>
-                                            <table id="myTable" class="table table-striped" style="background-color: whitesmoke;">
+                                            <table id="myTable4" class="table table-striped" style="background-color: whitesmoke;">
                                                 <thead>
                                                     <tr>
                                                         <th style="text-align: center;">Cliente</th>
@@ -261,7 +267,7 @@ ob_start();
                                                 <tbody>
                                                     <tr>
                                                         <?php
-                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE statusn IS NULL ORDER BY nota ASC";
+                                                        $query = "SELECT DISTINCT nota, cliente, vendedor, statusn FROM notas WHERE cliente IS NULL ORDER BY nota DESC";
                                                         //$resultado=$conexion->query($query);
                                                         $resultado = mysqli_query($conexion, $query);
                                                         session_start();
@@ -353,6 +359,12 @@ ob_start();
 
         document.body.removeChild(downloadLink);
     }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
 </script>
 
 </html>

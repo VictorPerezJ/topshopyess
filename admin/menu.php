@@ -14,6 +14,7 @@ ob_start(); ?>
     <a href="generar_nota.php?precio_nota=menudeo">Generar Nota Menudeo</a>
     <a href="notas.php">Notas</a>
     <a href="generar_reporte.php">Reportes</a>
+    <a href="users.php">Usuarios</a>
     <a href="../funciones/cerrar_sesion.php">Cerrar Sesión</a>
 </div>
 <span style="font-size:30px;cursor:pointer; color:black" onclick="openNav()">&#9776; Menú</span>

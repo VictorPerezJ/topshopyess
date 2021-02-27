@@ -23,7 +23,7 @@ while ($row = mysqli_fetch_assoc($resultadop)) {
     $fecha = $row['fecha'];
     $statusn = $row['statusn'];
     
-    $tipoDeEnvio = $row['tipov'];
+    $tipoDeEnvio = $row['tipo_env'];
     $total = $precio * $cantidad;
 
     $totalG += $total;
@@ -94,7 +94,7 @@ $total_total = $totalG + $envio;
     <?php include('menu.php'); ?>
 
     <section>
-    <?php echo $tipoN; ?>
+    <?php //echo $tipoN; ?>
         <div class="container">
 
             <div id="exportContent">
@@ -163,6 +163,7 @@ $total_total = $totalG + $envio;
                                         <td style="text-align: center;"><?php echo $coment ?></td>
                                         <td style="text-align: center;">$<?php echo $total ?></td>
                                         <td style="text-align: center;">
+
                                         <a href="eliminarProd.php?id=<?php echo $id_p?>&cantidad=<?php echo $cantidad ?>&producto=<?php echo $producto?>&clave=<?php echo $clave_de_nota ?>&tipoN=<?php echo $tipoN ?>"><button style="border: none;"><i class="fas fa-times" style="color:red"></i></button></a>
                                         </td>
                                         <td style="text-align: center;">
@@ -246,6 +247,11 @@ $total_total = $totalG + $envio;
                         
                         <input type="text" value="<?php echo $clave_de_nota ?>" id="claveg" name="clave" style="display: none;">
                         <button onclick="guardarNota();" class="btn btn-secondary" style="float: right; color: white;">Guardar Nota</button>
+                    </form><br><br>
+                    <form method="POST" action="cancelar2.php">
+                        <input type="text" name="cancelar" id="guardar1" value="Cancelada" style="display: none;">
+                        <input type="text" value="<?php echo $clave_de_nota ?>" id="claveg" name="clave" style="display: none;">
+                        <button onclick="CancelarN(); " class="btn btn-danger" style="float: right; color: white;">Cancelar Nota</button>
                     </form>
                 </div>
                 <div class="col-md-3">
@@ -518,6 +524,23 @@ $total_total = $totalG + $envio;
         });
     }
 </script>
+<script>
+    // function CancelarN() {
+    //     var guardar = $('#guardar1').val();
+    //     var claveg = $('#claveg').val();
 
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: 'CancelarN.php',
+    //         data: 'guardar=' + guardar + '&claveg=' + claveg,
+    //         dataType: 'html',
+    //         async: false,
+    //         success: function() {
+    //             alert("Nota Cancelada y Eliminada"),
+    //             window.location.replace("notas.php");
+    //         }
+    //     });
+    // }
+</script>
 
 </html>

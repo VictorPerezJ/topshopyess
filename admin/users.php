@@ -46,12 +46,16 @@ $id_p_n = $id_p + 1;
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <h3 style="text-align: center;">Agregar Nuevo Cliente</h3><br>
+                    <h3 style="text-align: center;">Agregar Usuarios</h3><br>
                     <form action="agregarUser.php" method="post" class="formulario">
-                        <input type="text" class="w3-input" name="nombre_c" placeholder="Nombre del Cliente" required><br><br>
-                        <input type="text" class="w3-input" name="numero_tel" placeholder="Número de Teléfono" minlength="10" maxlength="15" required><br><br>
-                        <input type="text" class="w3-input" name="ciudad" placeholder="Ciudad" required><br><br>
-                        <input type="submit" name="nombre" value="Agregar Cliente" class="btn btn-success">
+                        <input type="text" class="w3-input" name="nombre_c" placeholder="Nombre del Tabajador" required><br><br>
+                        <input type="text" class="w3-input" name="usuario" placeholder="Nombre de Usuario" required><br><br>
+                        <input type="text" class="w3-input" name="contra" placeholder="Contraseña" required><br><br>
+                        <select name="rol" id="">
+                        <option value="admin">Admin</option>
+                        <option value="usuario">Usuario</option>
+                        </select>
+                        <input type="submit" name="nombre" value="Agregar Usuario" class="btn btn-success">
                     </form>
                     <br><br>
                 </div>
