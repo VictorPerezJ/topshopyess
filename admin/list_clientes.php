@@ -3,6 +3,7 @@ session_start();
 ob_start();
 
 include_once('../conexion.php');
+include_once('../validacion.php');
 
 ?>
 <!DOCTYPE html>
@@ -27,6 +28,7 @@ include_once('../conexion.php');
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
+
 <body style="background-color: #f75c96;  color: white;">
     <?php include('menu.php'); ?>
 
@@ -44,6 +46,7 @@ include_once('../conexion.php');
                                 <th style="text-align: center;">Teléfono</th>
                                 <th style="text-align: center;">Ciudad</th>
                                 <th style="text-align: center;">Modificar</th>
+                                <th style="text-align: center;">Eliminar Cliente</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,6 +69,9 @@ include_once('../conexion.php');
                                         <td style="text-align: center;"><a href="tel:+52<?php echo $telefono ?>"><?php echo $telefono ?></a></td>
                                         <td style="text-align: center;"><?php echo $ciudad ?></td>
                                         <td style="text-align: center;"><a href="modificar_c.php?id=<?php echo $id_p ?>"><button class='btn btn-primary' style="width:100%"> <i class="fas fa-sync"></i> modificar</button></a></td>
+                                        <td style="text-align: center;">
+                                        <a href="eliminarClien.php?id=<?php echo $id_p ?>" onclick="javascript:return asegurar();"><button class='btn btn-danger' style=" width:100%">Eliminar</button></a>
+                                    </td>
                             </tr>
                         <?php
                                 }
@@ -89,4 +95,11 @@ include_once('../conexion.php');
 </script>
 <!-- Script del menú -->
 
+<script>
+function asegurar ()
+  {
+      rc = confirm("¿Seguro que desea Eliminar?");
+      return rc;
+  }
+</script>
 </html>

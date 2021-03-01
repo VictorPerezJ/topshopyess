@@ -1,5 +1,6 @@
 <?php
 include_once('../conexion.php');
+include_once('../validacion.php');
 
 session_start();
 ob_start();

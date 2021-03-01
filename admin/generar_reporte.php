@@ -1,6 +1,6 @@
 <?php
 
-include('../validacion.php');
+include_once('../validacion.php');
 
 include('../conexion.php');
 

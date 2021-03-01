@@ -7,7 +7,7 @@ $usuario=$_POST['usuario'];
 $contra=$_POST['contra'];
 $rol=$_POST['rol'];
 
-$agregar="INSERT INTO clientes SET nombre='$nombre', usuario_log='$usuario', contra='$contra', rol='$rol'";
+$agregar="INSERT INTO users SET nombre='$nombre', usuario_log='$usuario', contra='$contra', rol='$rol'";
 
 $actualizado=mysqli_query($conexion, $agregar);
 

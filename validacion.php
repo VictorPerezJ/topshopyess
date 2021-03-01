@@ -3,7 +3,7 @@ session_start();
  ob_start();
 		if ( $_SESSION['auto'] != "si"){
 			//$destino='/permisos/';
-	      echo "<script>window.location='index.php?error_login=177';</script>";
+	      echo "<script>window.location='../index.php?error_login=177';</script>";
 			//echo mensajes($_SESSION["user_name"]. 'no estas logeado',"rojo");
 		
 		}else{

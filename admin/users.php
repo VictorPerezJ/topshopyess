@@ -1,18 +1,9 @@
 <?php
-include_once('../conexion.php');
-
 session_start();
 ob_start();
 
-include('../funciones/por_agotarse.php');
-
-$query = "SELECT * FROM catalogo ORDER BY id DESC LIMIT 1";
-$resultado = mysqli_query($conexion, $query);
-session_start();
-while ($row = mysqli_fetch_assoc($resultado)) {
-    $id_p = $row['id'];
-}
-$id_p_n = $id_p + 1;
+include_once('../conexion.php');
+include_once('../validacion.php');
 
 ?>
 <!DOCTYPE html>
@@ -62,6 +53,57 @@ $id_p_n = $id_p + 1;
             </div>
         </div>
     </section>
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <!-- Tabla -->
+                    <h2 style="text-align: center; color:white">Listado de Clientes Existentes</h2><br>
+                    <table id="myTable" class="table table-striped" style="background-color: whitesmoke;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">Id</th>
+                                <th style="text-align: center;">Nombre</th>
+                                <th style="text-align: center;">Usuario</th>
+                                <th style="text-align: center;">Contraseña</th>
+                                <th style="text-align: center;">Rol</th>
+                                <th style="text-align: center;">Eliminar Usuario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <!-- Consulta -->
+                                <?php
+                                $query = "SELECT * FROM users ORDER BY id ASC";
+                                //$resultado=$conexion->query($query);
+                                $resultado = mysqli_query($conexion, $query);
+                                session_start();
+                                //while($row=$resultado->fetch_assoc()){
+                                while ($row = mysqli_fetch_assoc($resultado)) {
+                                    $id_p = $row['id'];
+                                    $nombre_c = $row['nombre'];
+                                    $usuario = $row['usuario_log'];
+                                    $contra = $row['contra'];
+                                    $rol = $row['rol'];
+                                ?>
+                                        <td style="text-align: center;"><?php echo $id_p ?></td>
+                                        <td style="text-align: center;"><?php echo $nombre_c ?></td>
+                                        <td style="text-align: center;"><?php echo $usuario ?></td>
+                                        <td style="text-align: center;"><?php echo $contra ?></td>
+                                        <td style="text-align: center;"><?php echo $rol ?></td>
+                                        <td style="text-align: center;">
+                                        <a href="eliminarUser.php?id=<?php echo $id_p ?>" onclick="javascript:return asegurar();"><button class='btn btn-danger' style=" width:100%">Eliminar</button></a>
+                                    </td>
+                            </tr>
+                        <?php
+                                }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 <!-- Script del menú -->
 <script>
@@ -74,6 +116,13 @@ $id_p_n = $id_p + 1;
     }
 </script>
 <!-- Script del menú -->
-<?php include('../agregar_prod.php'); ?>
+<script>
+function asegurar ()
+  {
+      rc = confirm("¿Seguro que desea Eliminar?");
+      return rc;
+  }
+</script>
+
 
 </html>

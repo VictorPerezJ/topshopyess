@@ -1,18 +1,9 @@
 <?php
 include_once('../conexion.php');
+include_once('../validacion.php');
 
 session_start();
 ob_start();
-
-include('../funciones/por_agotarse.php');
-
-$query = "SELECT * FROM catalogo ORDER BY id DESC LIMIT 1";
-$resultado = mysqli_query($conexion, $query);
-session_start();
-while ($row = mysqli_fetch_assoc($resultado)) {
-    $id_p = $row['id'];
-}
-$id_p_n = $id_p + 1;
 
 ?>
 <!DOCTYPE html>
@@ -47,7 +38,7 @@ $id_p_n = $id_p + 1;
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <h3 style="text-align: center;">Agregar Nuevo Cliente</h3><br>
-                    <form action="agregarUser.php" method="post" class="formulario">
+                    <form action="agregar_cliente_db.php" method="post" class="formulario">
                         <input type="text" class="w3-input" name="nombre_c" placeholder="Nombre del Cliente" required><br><br>
                         <input type="text" class="w3-input" name="numero_tel" placeholder="Número de Teléfono" minlength="10" maxlength="15" required><br><br>
                         <input type="text" class="w3-input" name="ciudad" placeholder="Ciudad" required><br><br>
